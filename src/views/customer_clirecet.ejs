@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <link href="/assets/img/favico.ico" rel="icon">
+    
+    <title>MED | Receta</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  </head>
+  <body class="bg-dark-200">
+    <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/prods"><h1><font color="white">MED</font></h1></a>
+          <div class="collapse navbar-collapse" id="navbarColor03">
+            <ul class="navbar-nav me-auto">
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-14">
+                <div class="card">
+                    <div class="card-body">
+                        <form action="/clirecet" method="get">
+                            <b><label class="formkit-label" for="input_0"><h5>Receta</h5></label></b>
+                             <p>
+                                <table id = "receta" class="table table-bordered table-hover text-center">
+                                    <thead>
+                                        <tr class="table-info">
+                                           
+                                            <th class="text-center">
+                                                Nombre Paciente
+                                            </th>
+                                            <th class="text-center">
+                                                Fecha Consulta
+                                            </th>
+                                            <th class="text-center">
+                                                Laboratorios
+                                            </th>                               
+                                            <th class="text-center">
+                                                Indicaciones
+                                            </th>
+                                            
+                                    </thead>
+                        </p>
+
+                        <tbody> 
+                            <% if (data) { %>
+                                <% for (var i = 0; i < data.length; i++) { %>
+                                <tr>
+                            
+                 
+                                    <td><%= data[i].Nocli %></td>
+                                    <td><%= data[i].Fecconsul %></td>
+                                    <td><%= data[i].Dlabs %></td>
+                                    <td><%= data[i].Consulcome %></td>
+
+                                </tr>
+                                <% } %>
+                                <% } %>
+                                    </tbody>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+    
+    
+        <script>
+          var table = new DataTable('#receta', {
+              pageLength: 5,
+              lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'Todos']],
+              language: {
+                  url: '//cdn.datatables.net/plug-ins/1.13.5/i18n/es-ES.json',
+              },
+    
+              dom: 'Bfrtip',
+    
+              buttons: [
+    
+              {
+                extend: 'pdf',
+                text: '<i class="fa-solid fa-file-pdf fa-2xl" style="color: #f00a0a;"></i>',
+                titleAtrr: 'Exportar a PDF',
+                classNme: 'btn btn-success',
+                exportOptions: {
+                    modifier: {
+                        page: 'current'
+                    }
+                }
+            },
+
+        ]
+          });
+          </script>
+
+  </body>
+</html>

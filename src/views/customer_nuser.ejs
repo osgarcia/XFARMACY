@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <link href="/assets/img/favico.ico" rel="icon">
+    
+    <title>MED</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  </head>
+
+  <body class="bg-dark-200">
+    <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/user"><h1><font color="white">MED</font></h1></a>
+
+        </div>
+    </nav>
+
+    <div class="container mt-5" >
+        <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-body text-center">
+                    <b><label class="formkit-label" for="input_0"><h5>Creacion de Usuario</h5></label></b>
+                    <form action="/nuser/" method="post">
+            
+                        
+                        
+                        <div class="form-group">
+                            <input type="text" name="Nuser" placeholder="Nombre De Empleado" class="form-control">
+                    
+                        </div>
+                        <div class="form-group">
+                            
+                            <input type="text" name="User" placeholder="Usuario"   class="form-control">
+                    
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="Pass" placeholder="Password" class="form-control">
+                    
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="DPI" placeholder="DPI" class="form-control">
+                    
+                        </div>
+                        <div class="form-group">
+                          <label class="formkit-label" for="input_0">Fecha De Ingreso</label>
+                            <input type="date" name="Fecingre" placeholder="Fecha De Ingreso" class="form-control">
+
+                           
+                    
+                            <p> <div class="formkit-outer" data-type="select">
+                                <div class="formkit-wrapper">
+                                  <label class="formkit-label" for="input_0">Rol</label>
+                                  <div class="formkit-inner">
+                                    <select class="formkit-input" id="input_0" name="Rol">
+                                      <option class="formkit-option text-center" value=""></option>
+                                      <option class="formkit-option text-center" value="DR">Doctor</option>
+                                      <option class="formkit-option text-center" value="AD">Administrativo</option>
+                                    </select>
+                                </p>
+
+                                <p> <div class="formkit-outer" data-type="select">
+                                  <div class="formkit-wrapper">
+                                    <label class="formkit-label" for="input_0">Especialidad</label>
+                                    <div class="formkit-inner">
+                                      <select class="formkit-input" id="input_0" name="Dresp">
+                                        <option class="formkit-option text-center" value="N/A">N/A</option>
+                                        <option class="formkit-option text-center" value="GEN">General</option>
+                                        <option class="formkit-option text-center" value="GIN">Ginecologia</option>
+                                        <option class="formkit-option text-center" value="OBS">Obstetricia</option>
+                                        <option class="formkit-option text-center" value="CAR">Cardiologia</option>
+                                        <option class="formkit-option text-center" value="NEU">Neurologia</option>
+                                        <option class="formkit-option text-center" value="ORT">Ortopedia</option>
+                                        <option class="formkit-option text-center" value="PSI">Psicologia</option>
+                                      </select>
+                                  </p>
+                           
+                        <p>
+                        <button  class="btn btn-primary">Crear Usuario</button>
+                    </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+            
+
+  </body>
+</html>

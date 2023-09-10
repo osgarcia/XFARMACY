@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <link href="/assets/img/favico.ico" rel="icon">
+    
+    <title>Med | Consultas</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  </head>
+
+  <body class="bg-dark-200">
+    <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#"><h1><font color="white">MED</font></h1></a>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-body tex">
+                <form action="/hourgen/<%=data.IDH%>" method="post">
+        
+                   
+
+
+            <div class="form-group text-center">
+                <label class="formkit-label" for="input_0"><b>No. Doctor</b></label>
+                <input type="text" name="IDD" value="<%= data.IDD%>" disabled= "disabled" class="form-control text-center">
+        
+            </div>
+
+            <div class="form-group text-center">
+                <label class="formkit-label" for="input_0"><b>Doctor</b></label>
+                <input type="text" name="Ndoc" value="<%= data.Ndoc%>" disabled= "disabled"  class="form-control text-center">
+        
+            </div>
+
+            <div class="form-group text-center">
+                <label class="formkit-label" for="input_0"><b></b></label>
+                <input type="text" name="Hdoc1" value="<%= data.Hdoc1%>"  class="form-control text-center">
+        
+            </div>
+           
+            <div class="form-group text-center">
+                <label class="formkit-label" for="input_0"><b></b></label>
+                <input type="text" name="Hdoc2" value="<%= data.Hdoc2%>"  class="form-control text-center">
+        
+            </div>
+            <div class="form-group text-center">
+                <label class="formkit-label" for="input_0"><b></b></label>
+                <input type="text" name="Hdoc3" value="<%= data.Hdoc3%>"  class="form-control text-center">
+        
+            </div>
+            <div class="form-group text-center">
+                <label class="formkit-label" for="input_0"><b></b></label>
+                <input type="text" name="Hdoc4" value="<%= data.Hdoc4%>"  class="form-control text-center">
+        
+            </div>
+            <div class="form-group text-center">
+                <label class="formkit-label" for="input_0"><b></b></label>
+                <input type="text" name="Hdoc5" value="<%= data.Hdoc5%>"  class="form-control text-center">
+        
+            </div>
+            <div class="form-group text-center">
+                <label class="formkit-label" for="input_0"><b></b></label>
+                <input type="text" name="Hdoc6" value="<%= data.Hdoc6%>"  class="form-control text-center">
+        
+            </div>
+            <div class="form-group text-center">
+                <label class="formkit-label" for="input_0"><b></b></label>
+                <input type="text" name="Hdoc7" value="<%= data.Hdoc7%>"  class="form-control text-center">
+        
+            </div>
+            <div class="form-group text-center">
+                <label class="formkit-label" for="input_0"><b></b></label>
+                <input type="text" name="Hdoc8" value="<%= data.Hdoc8%>"  class="form-control text-center">
+        
+            </div>
+            <div class="form-group text-center">
+                <label class="formkit-label" for="input_0"><b></b></label>
+                <input type="text" name="Hdoc9" value="<%= data.Hdoc9%>"  class="form-control text-center">
+        
+            </div>
+            <div class="form-group text-center">
+                <label class="formkit-label" for="input_0"><b></b></label>
+                <input type="text" name="Hdoc10" value="<%= data.Hdoc10%>"  class="form-control text-center">
+        
+            </div>
+           
+            
+          
+            <div class="form-group text-center">
+            <button type="submit" class="btn btn-success">
+                Actualizar Horario
+            </button>
+        </div>
+        </form>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

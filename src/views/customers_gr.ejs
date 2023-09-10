@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <link href="/assets/img/favico.ico" rel="icon">
+    
+    <title>MED</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+  </head>
+  <body class="bg-dark-200">
+    <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/"><h1><font color="white">MED</font></h1></a>
+          <div class="collapse navbar-collapse" id="navbarColor03">
+            <ul class="navbar-nav me-auto">
+
+              
+              <li class="nav-item">
+                <a class="nav-link" href="/prods"><font color="white">Pacientes</font></a>
+              </li>
+         
+              
+           
+          </div>
+        </div>
+      </nav>
+
+<div class="container">
+<div class="row mt-5">
+<div class="col-md-7">
+    <form>
+
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>
+                    Solicitud
+                </th>
+                <th>
+                    Cliente
+                </th>
+
+                <th>
+                    Producto
+                </th>
+
+                <th>
+                  Casa
+              </th>
+                <th>
+                    Cantidad
+                </th>
+                 
+                <th>
+                    Precio Total 
+                </th>
+                
+                <th>
+                    Acciones
+                </th>
+            </tr>
+        </thead>
+
+        <tbody> 
+         
+<% if (data) { %>
+    <% for (var i = 0; i < data.length; i++) { %>
+        
+    <tr>
+
+        <td><%= data[i].ID %></td>
+        <td><%= data[i].Clnomb %></td>
+        <td><%= data[i].Prod %></td>
+        <td><%= data[i].Casprod %></td>
+        <td><%= data[i].Cantprod %></td>
+        <td><h6>Q</h6><%= data[i].Preprod %></td>
+        <td>
+            <p> <a href="/delete/<%= data[i].ID %>" class="btn btn-danger">Denegar</a>
+            </p>
+            <a href="/update/<%= data[i].ID %>" class="btn btn-success">Aprobar</a>
+        </td>
+    </tr>
+    <% } %>
+    <% } %>
+
+        </tbody>
+
+    </table>
+    </div>
+</form>
+
+    <div class="col-md-5">
+<div class="card">
+    <div class="card-body">
+        <b><label class="formkit-label" for="input_0"><h5>Orden De Compra</h5></label></b>
+        <form action="/addgr" method="post">
+
+            
+            <div class="form-group">
+                <input type="text" name="Clnomb" placeholder="Cliente" class="form-control">
+        
+            </div>
+            <div class="form-group">
+                <input type="text" name="Nit" placeholder="Nit" class="form-control">
+        
+            </div>
+ 
+            <div class="form-group">
+              <input type="text" name="Prod" placeholder="Producto" class="form-control">
+      
+          </div>
+            <div class="form-group">
+                <input type="text" name="Casprod" placeholder="Casa" class="form-control">
+        
+            </div>
+
+            <div class="form-group">
+                <input type="text" name="Cantprod" placeholder="Unidades" class="form-control">
+        
+            </div>
+          
+            <div class="form-group">
+                <input type="text" name="Preprod" placeholder="Valor Unitario (Q)" class="form-control">
+        
+            </div>
+            <button type="submit" class="btn btn-primary">
+                Generar Compra
+            </button>
+    
+           
+      
+        </form>
+    </div>
+</div>
+    </div>
+</div>
+</div>
+
+  </body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Vpay</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
+  </head>
+  <body class="bg-dark-200">
+    <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/credit"><h1><font color="white">VPAY</font></h1></a>
+          <div class="collapse navbar-collapse" id="navbarColor03">
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                <a class="nav-link active" href="/"><font color="white">Inicio</font>
+                 
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/cli/"><font color="white">Clientes</font></a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/prods"><font color="white">Productos</font></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-14">
+                <div class="card">
+                    <div class="card-body">
+
+                        <form action="/desem/<%= data.Nucredit%>" method="post">
+
+                <div class="form-group">
+                <label class="formkit-label" for="input_0">No. Credito</label>
+                <input type="text" name="Nucredit" value="<%= data.Nucredit%>" disabled= "disabled"  class="form-control">
+        
+            </div>
+            <div class="form-group">
+                <label class="formkit-label" for="input_0">Nombre Completo</label>
+                <input type="text" name="Clnomb" value="<%= data.Clnomb%>" disabled= "disabled" class="form-control">
+        
+            </div>
+           
+            <div class="form-group">
+                <label class="formkit-label" for="input_0">Codigo De Producto</label>
+                <input type="text" name="Caprod" value="<%= data.Caprod%>" disabled= "disabled" class="form-control">
+        
+            </div>
+
+            <div class="form-group">
+                <label class="formkit-label" for="input_0">Codigo De Producto</label>
+                <input type="text" name="Monapro" value="Q <%= data.Monapro%>" disabled= "disabled" class="form-control">
+        
+            </div>
+
+            <div class="form-group">
+                <label class="formkit-label" for="input_0">Tasa De Interes</label>
+                <input type="text" name="Tint" value="<%= data.Tint%> %" disabled= "disabled" class="form-control">
+        
+            </div>
+
+
+            <p> <div class="formkit-outer" data-type="select">
+                <div class="formkit-wrapper">
+                  <label class="formkit-label" for="input_0">Metodo De Desembolso</label>
+                  <div class="formkit-inner">
+                    <select class="formkit-input" id="input_0" name="Desem">
+                      <option class="formkit-option" value=""></option>
+                      <option class="formkit-option" Value="Cheque">Cheque</option>
+                      <option class="formkit-option" Value="ATM">ATM</option>
+                      <option class="formkit-option" Value="T Movil">Transferencia Movil</option>
+                      <option class="formkit-option" Value="T ACH">Transferencia ACH</option>
+                  
+                    </select>
+                </p>
+
+                <p> <div class="formkit-outer" data-type="select">
+                    <div class="formkit-wrapper">
+                      <label class="formkit-label" for="input_0">No. Cuotas</label>
+                      <div class="formkit-inner">
+                        <select class="formkit-input" id="input_0" name="Ncuot">
+                          <option class="formkit-option" value=""></option>
+                          <option class="formkit-option" value="1">1</option>
+                          <option class="formkit-option" value="2">2</option>
+                          <option class="formkit-option" value="3">3</option>
+                          <option class="formkit-option" value="4">4</option>
+                          <option class="formkit-option" value="5">5</option>
+                          <option class="formkit-option" value="6">6</option>
+                          <option class="formkit-option" value="7">7</option>
+                          <option class="formkit-option" value="8">8</option>
+                          <option class="formkit-option" value="9">9</option>
+                          <option class="formkit-option" value="10">10</option>
+                          <option class="formkit-option" value="11">11</option>
+                          <option class="formkit-option" value="12">12</option>
+                          <option class="formkit-option" value="13">13</option>
+                          <option class="formkit-option" value="14">14</option>
+                          <option class="formkit-option" value="15">15</option>
+                          <option class="formkit-option" value="16">16</option>
+                          <option class="formkit-option" value="17">17</option>
+                          <option class="formkit-option" value="18">18</option>
+                          <option class="formkit-option" value="19">19</option>
+                          <option class="formkit-option" value="20">20</option>
+                          <option class="formkit-option" value="21">21</option>
+                          <option class="formkit-option" value="22">33</option>
+                          <option class="formkit-option" value="23">23</option>
+                          <option class="formkit-option" value="24">24</option>
+
+                        </select>
+                    </p>
+
+
+                                    
+                                   
+                <p> </p>
+                <button type="submit" class="btn btn-success">
+                    Desembolsar
+                </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </body>
+</html>
