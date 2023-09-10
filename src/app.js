@@ -33,7 +33,7 @@ app.use(myConnection(mysql, {
     host: 'localhost',
     user: 'root',
     password: '',
-    port: 8080,
+    port: 3306,
     database: 'xfarmacy'
 }, 'single'));
 app.use(express.urlencoded({extended: false}));
