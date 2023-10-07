@@ -6,7 +6,16 @@ const myConnection = require('express-myconnection');
 const session = require('express-session');
 const stripe = require('stripe')('sk_test_51NoKp9JNkXDc99lCXz8FZCz8wxAqOPqGBBfiIL1kOHXsRGlRmwdeHomPfVCtvrfN2GwMJgItis4MwTrNisoyeNAI00lg1ybONB');
 const app = express();
+const dotenv = require('dotenv').config();
 
+module.exports = {
+    DB_HOST : process.env.DB_HOST || 'localhost',
+    DB_USER : process.env.DB_USER || 'root',
+    DB_PASS : process.env.DB_PASS || '',
+    DB_PORT : process.env.DB_PORT || '3306',
+    DB_NAME : process.env.DB_NAME || 'xfarmacy'
+
+}
 
 
 //Variable de Sesion
@@ -30,12 +39,13 @@ app.set('views', path.join(__dirname, 'views'));
 //middlewares
 app.use(morgan('dev'));
 app.use(myConnection(mysql, {
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    port: 3306,
-    database: 'xfarmacy'
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    port: process.env.DB_PORT,
+    database: 'xfarmacy',
 }, 'single'));
+
 app.use(express.urlencoded({extended: false}));
 
 app.use(express.static('public'));
