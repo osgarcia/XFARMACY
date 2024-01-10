@@ -5,8 +5,8 @@
 
     <link href="/assets/img/favico.ico" rel="icon">
     
-    <title>MED</title>
-    <link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.min.css">
+    <title>MED | Usuario</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   </head>
@@ -14,7 +14,7 @@
   <body class="bg-dark-200">
     <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="/user"><h1><font color="white">MED</font></h1></a>
+          <a class="navbar-brand" href="/menadmin/<%= User %>#about"><h1><font color="white">MED</font></h1></a>
 
         </div>
     </nav>
@@ -29,45 +29,76 @@
             
                         
                         
-                        <div class="form-group">
-                            <input type="text" name="Nuser" placeholder="Nombre De Empleado" class="form-control">
-                    
+                      <div class="row">
+                        <div class="col-md-6 mb-4">
+                          <div class="form-outline">
+                            <input type="text" name="Nuser" placeholder="Nombre De Empleado" required class="form-control text-center">
+                          </div>
                         </div>
-                        <div class="form-group">
-                            
-                            <input type="text" name="User" placeholder="Usuario"   class="form-control">
-                    
+                        <div class="col-md-6 mb-4">
+                          <div class="form-outline">
+                            <input type="text" name="User" placeholder="Usuario"   required class="form-control text-center">
+                          </div>
                         </div>
-                        <div class="form-group">
-                            <input type="password" name="Pass" placeholder="Password" class="form-control">
-                    
                         </div>
-                        <div class="form-group">
-                            <input type="text" name="DPI" placeholder="DPI" class="form-control">
-                    
+                        <div class="row">
+                        <div class="col-md-6 mb-4">
+                          <div class="form-outline">
+                            <input type="password" name="Pass" placeholder="Password" required class="form-control text-center">
+                          </div>
                         </div>
-                        <div class="form-group">
-                          <label class="formkit-label" for="input_0">Fecha De Ingreso</label>
-                            <input type="date" name="Fecingre" placeholder="Fecha De Ingreso" class="form-control">
+                        <div class="col-md-6 mb-4">
+                          <div class="form-outline">
+                            <input type="text" name="Nacuser" placeholder="Nacionalidad" required class="form-control text-center">
+                          </div>
+                        </div>
+                        </div>
 
+                        <div class="row">
+                          <div class="col-md-6 mb-4">
+                            <div class="form-outline">
+                              <label class="formkit-label" for="input_0">Fecha De Nacimiento</label>
+                            <input type="date" name="Fecnac" required class="form-control text-center">
+                            </div>
+                          </div>
+                          <div class="col-md-6 mb-4">
+                            <div class="form-outline">
+                              <label class="formkit-label" for="input_0">Fecha De Ingreso</label>
+                              <input type="date" name="Fecingre" required class="form-control text-center">
+                            </div>
+                          </div>
+                          </div>
+
+                        <div class="form-group">
+                          <input type="text" name="DPI" placeholder="DPI" required class="form-control text-center"> 
+                          </div>
                            
                     
-                            <p> <div class="formkit-outer" data-type="select">
-                                <div class="formkit-wrapper">
+                             <div class="row">
+                        <div class="col-md-6 mb-4">
+                          <div class="form-outline">
                                   <label class="formkit-label" for="input_0">Rol</label>
                                   <div class="formkit-inner">
-                                    <select class="formkit-input" id="input_0" name="Rol">
+                                    <select required class="formkit-input" id="input_0" name="Rol">
                                       <option class="formkit-option text-center" value=""></option>
                                       <option class="formkit-option text-center" value="DR">Doctor</option>
-                                      <option class="formkit-option text-center" value="AD">Administrativo</option>
+                                      <option class="formkit-option text-center" value="SE">Secretaria</option>
+                                      <option class="formkit-option text-center" value="SO">Soporte</option>
+                                      <option class="formkit-option text-center" value="FA">Farmacia</option>
+                                      <option class="formkit-option text-center" value="LA">Laboratorio</option>
+                                      <option class="formkit-option text-center" value="BO">Bodega</option>
+                                      <option class="formkit-option text-center" value="AD">Admisitrador</option>
                                     </select>
-                                </p>
+                                  </div>
+                                </div>
+                                </div>
+                              
 
-                                <p> <div class="formkit-outer" data-type="select">
-                                  <div class="formkit-wrapper">
+                                <div class="col-md-6 mb-4">
+                                  <div class="form-outline">
                                     <label class="formkit-label" for="input_0">Especialidad</label>
                                     <div class="formkit-inner">
-                                      <select class="formkit-input" id="input_0" name="Dresp">
+                                      <select required class="formkit-input" id="input_0" name="Dresp">
                                         <option class="formkit-option text-center" value="N/A">N/A</option>
                                         <option class="formkit-option text-center" value="GEN">General</option>
                                         <option class="formkit-option text-center" value="GIN">Ginecologia</option>
@@ -77,8 +108,15 @@
                                         <option class="formkit-option text-center" value="ORT">Ortopedia</option>
                                         <option class="formkit-option text-center" value="PSI">Psicologia</option>
                                       </select>
-                                  </p>
-                           
+                                    </div>
+                                  </div>
+                                  </div>
+                                </div>
+
+                                <div class="form-group">
+                                  <input type="tex" name="drestat"  value="A" style="display:none" class="form-control">
+                          
+                              </div>
                         <p>
                         <button  class="btn btn-primary">Crear Usuario</button>
                     </p>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <link href="/assets/img/favico.ico" rel="icon">
+    
+    <title>Med | Consultas</title>
+    <link rel="stylesheet" href="https://bootswatch.com/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  </head>
+
+  <body class="bg-dark-200">
+    <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/prods/<%= User %>#about"><h1><font color="white">MED</font></h1></a>
+        </div>
+    </nav>
+
+    <div class="container mt-5 text-center">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-body p-5 shadow-5 text-center">
+                    <b><label class="formkit-label" for="input_0"><h4><u>Datos Personales</u></h4></label></b>
+                    <p>
+
+                    </p>
+                <form action="/edtpacien/<%=data.IDPa%>" method="post">
+        
+                                      
+                                      <div class="row">
+                                        <div class="col-xxl-4">
+                                            <label class="form-label" for="form3Example1"><b>Nombre Completo</b></label>
+                                            <input type="text" name="Noclie" placeholder="Paciente" value="<%= data.Noclie %>" class="form-control text-center">
+                                        </div>
+                                        
+                                    
+                                        
+                                          <div class="col-xxl-4">
+                                            <label class="form-label" for="form3Example1"><b>Edad</b></label>
+                                            <input type="number" name="Cliedad" placeholder="Edad" value="<%= data.Cliedad %>" class="form-control text-center">
+                                          </div>
+                                 
+                
+                                      
+                                          <div class="col-xxl-4">
+                                            <label class="form-label" for="form3Example1"><b>Fecha De Nacimento</b></label>
+                                            <input type="date" name="Fecna" value="<%= data.Fecna %>" class="form-control text-center">
+                                          </div>
+                                        </div>
+                                        
+                                        <p>
+
+                                        </p>
+
+                                        <div class="row">
+                                            <div class="col-xxl-4">
+                                                <label class="form-label" for="form3Example1"><b>DPI</b></label>
+                                                <input type="number" name="Cldpi" value="<%= data.Cldpi %>" class="form-control text-center">
+                                              </div>
+
+                                        <div class="col-xxl-4">
+                                            <label class="form-label" for="form3Example1"><b>No. Celular</b></label>
+                                            <input type="number" name="Clcel" value="<%= data.Clcel %>" class="form-control text-center">
+                                          </div>
+
+                                          <div class="col-xxl-4">
+                                            <label class="form-label" for="form3Example1"><b>No. Telefono</b></label>
+                                            <input type="number" name="Cltel"  value="<%= data.Cltel %>" class="form-control text-center">
+                                          </div>
+                                        </div>
+
+                                        <p>
+
+                                        </p>
+                                          <div class="row">
+                                            <div class="col-xxl-4">
+                                                <label class="form-label" for="form3Example1"><b>Nit</b></label>
+                                                <input type="text" name="Clnit"  value="<%= data.Clnit %>" class="form-control text-center">
+                                              </div>
+                                                 
+                                              <div class="col-xxl-4">
+                                                <label class="form-label" for="form3Example1"><b>Nacionalidad</b></label>
+                                                <input type="text" name="Clnac"  value="<%= data.Clnac %>" class="form-control text-center">
+                                              </div>
+
+                                            <div class="col-xxl-4">
+                                              <fieldset>
+                                                <label class="form-label" for="form3Example1"><b>Genero:</b></label>
+                                                <p>
+                                                <div>
+                                                  <input type="radio"  name="Sexo" value="M" />
+                                                  <label>Masculino</label> 
+                                                
+                                                  <input type="radio"  name="Sexo" value="F" />
+                                                  <label>Femenino</label>
+                                                </div>
+                                                </fieldset>
+                                            </div>
+                                        </p>
+                                        <p>
+
+                                        </p>
+
+                                        </div>
+
+                                        <div class="row">
+                                          <div class="col-xxl-4">
+                                              <label class="form-label" for="form3Example1"><b>Direccion</b></label>
+                                              <input type="text" name="Cldomi"  value="<%= data.Cldomi %>" class="form-control text-center">
+                                            </div>
+
+                                            <div class="col-xxl-4">
+                                                <label class="form-label" for="form3Example1"><b>Departamento</b></label>
+                                                <input type="text" name="Cldepto" value="<%= data.Cldepto %>"   class="form-control text-center">
+                                            </div>
+                                            
+                                        
+                                            <div class="col-xxl-4">
+                                                <label class="form-label" for="form3Example1"><b>Municipio</b></label>
+                                                <input type="text" name="Clmuni" value="<%= data.Clmuni %>"  class="form-control text-center">
+                                              </div>
+                                            </div>
+
+                                            <p>
+
+                                            </p>
+
+                                      
+                                      <b><label class="formkit-label" for="input_0"><h4><u>Datos Medicos</u></h4></label></b>
+                                      <p>
+                                          
+                                      </p>
+
+                                        <div class="row">
+                                        <div class="col-xxl-4">
+                                              <label class="formkit-label" for="input_0"><b>Diabetico</b></label>
+                                                <select class="formkit-input" id="input_0" name="clidia">
+                                                  <option class="formkit-option" value=""></option>
+                                                  <option class="formkit-option" value="Y">SI</option>
+                                                  <option class="formkit-option" value="N">NO</option>     
+                                                </select>
+                                              </div>
+                                         
+                
+                                              <div class="col-xxl-4">
+                                                  <label class="formkit-label" for="input_0"><b>Presion&nbsp;&nbsp;</b></label>
+                                                    <select class="formkit-input" id="input_0" name="clipre">
+                                                      <option class="formkit-option" value=""></option>
+                                                      <option class="formkit-option" value="Y">SI</option>
+                                                      <option class="formkit-option" value="N">NO</option>    
+                                                    </select>
+                                                  </div>
+                                            
+                
+                                                  <div class="col-xxl-4">
+                                                      <label class="formkit-label" for="input_0"><b>Hipertenso</b></label>
+                                                        <select class="formkit-input" id="input_0" name="clihipe">
+                                                          <option class="formkit-option" value=""></option>
+                                                          <option class="formkit-option" value="Y">SI</option>
+                                                          <option class="formkit-option" value="N">NO</option>
+                                                        </select>
+                                                      </div>
+                                                   </div>
+                                             
+                                                      <p>
+                                                      </p>
+                                                      <p>
+                                                    </p>
+                
+                
+                                                      <div class="row">
+                                                        <div class="col-xxl-4">
+                                                            <label class="formkit-label" for="input_0"><b>Alergias&nbsp;&nbsp;</b></label>
+                                                              <select class="formkit-input" id="input_0" name="clialerg">
+                                                                <option class="formkit-option" value=""></option>
+                                                                <option class="formkit-option" value="Y">SI</option>
+                                                                <option class="formkit-option" value="N">NO</option>
+                                                              </select>
+                                                            </div>
+                                                       
+
+                                            
+                                                            <div class="col-xxl-4">
+                                                                <label class="formkit-label" for="input_0"><b>Traumas</b></label>
+                                                                  <select class="formkit-input" id="input_0" name="clitrauma">
+                                                                    <option class="formkit-option" value=""></option>
+                                                                    <option class="formkit-option" value="Y">SI</option>
+                                                                    <option class="formkit-option" value="N">NO</option>
+                                                                  </select>
+                                                                </div>
+                                                            
+                
+
+                                                                <div class="col-xxl-4">
+                                                                    <label class="formkit-label" for="input_0"><b>Cirugias &nbsp; &nbsp; &nbsp;</b></label>
+                                                                      <select class="formkit-input" id="input_0" name="cliquiru">
+                                                                        <option class="formkit-option" value=""></option>
+                                                                        <option class="formkit-option" value="Y">SI</option>
+                                                                        <option class="formkit-option" value="N">NO</option>         
+                                                                      </select>
+                                                                    </div>
+                                                                </div>
+
+                                                            <p>
+
+                                                            </p>
+                                                            <p>
+
+                                                            </p>
+                                             
+                                                           <div class="row">
+                                                          <div class="col-md-6 mb-4">     
+                                                <label class="form-label" for="form3Example1"><b>Tipo De Sangre</b></label>
+                                            <input type="text" name="clitipsa" value="<%= data.clitipsa %>"  class="form-control text-center">
+                                          </div>
+                                            
+                                    
+
+
+                                                          <div class="col-md-6 mb-4"> 
+                                                          <label class="formkit-label" for="input_0"><b>Habitos Toxicos</b></label>
+                                                          <p></p>
+                                                            <select class="formkit-input" id="input_0" name="clihabit">
+                                                              <option class="formkit-option" value=""></option>
+                                                              <option class="formkit-option" value="Y">SI</option>
+                                                              <option class="formkit-option" value="N">NO</option>
+                                                            </select>
+                                                          </div>
+                                                        </div>
+                                                                   
+                
+                                          <div class="row"> 
+                                          <div class="col-md-6 mb-4">
+                                            <div class="form-outline">
+                                                        <textarea type="text" name="clihistobst" class="form-control text-center" rows="10" cols="40" placeholder="Historial Obstetrico" ></textarea>
+                                            </div>
+                                            </div>
+                                   
+                                            <div class="col-md-6 mb-4">
+                                              <div class="form-outline">
+                                                        <textarea type="text" name="cliotr" class="form-control text-center" rows="10" cols="40" placeholder="Comentarios"></textarea>
+                                                        
+                                                    </div>
+                                                </div>       
+                                          </div>
+ 
+
+                    <p> 
+                    </p>
+
+                   
+                    <div class="form-group text-center">
+            <button type="submit" class="btn btn-success text-center">
+                Guardar Cambios
+            </button>
+                    </div>
+        </form>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <link href="/assets/img/favico.ico" rel="icon">
+    
+    <title>MED</title>
+    <link rel="stylesheet" href="https://bootswatch.com/lux/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  </head>
+
+  <body class="bg-dark-200">
+    <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/invprod"><h1><font color="white">MED</font></h1></a>
+
+        </div>
+    </nav>
+
+    <div class="container mt-5" >
+        <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-body text-center">
+                    <b><label class="formkit-label" for="input_0"><h5><u>Ficha Producto</u></h5></label></b>
+                    <form action="/addexislab/<%= data.ID %>" method="post">
+            <p></p>
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                              <div class="form-outline">
+                                <b><label class="formkit-label" for="input_0">Laboratorio</label></b>
+                            <input type="text" name="Nolab" value="<%= data.Nolab %>" class="form-control text-center">
+                        </div>
+                        </div>
+
+                       <div class="col-md-6 mb-4">
+                          <div class="form-outline">
+                            <b><label class="formkit-label" for="input_0">Precio</label></b>
+                            <input type="number" name="Prelab" value="<%= data.Prelab %>"   class="form-control text-center">
+                        </div>
+                    </div>
+                  </div>
+                  <div class="row  d-flex justify-content-center align-items-center h-100">
+                    <div class="form-outline col-md-7 mb-4">
+                    <div class="form-outline">
+                                <label class="formkit-label" for="input_0">Estado</label>
+                                <div class="formkit-inner">
+                                  <select required class="formkit-input" id="input_0" name="Stlab">
+                                    <option class="formkit-option text-center" value="D">Disponible</option>
+                                    <option class="formkit-option text-center" value="N">No Disponible</option>
+                                  </select>
+                                </div>
+                        </div>
+                        </div>
+                    </div>
+                    
+                        <p>
+                        <button  class="btn btn-primary">Actualizar</button>
+                    </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+  </body>
+</html>

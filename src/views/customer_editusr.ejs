@@ -2,66 +2,115 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Vpay</title>
+    <link href="/assets/img/favico.ico" rel="icon">
+    <title>MED | Actualizacion</title>
     <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
   </head>
 
   <body class="bg-dark-200">
     <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="/user"><h1><font color="white">VPAY</font></h1></a>
+          <a class="navbar-brand" href="/menadmin/<%= User %>#about"><h1><font color="white">MED</font></h1></a>
         </div>
     </nav>
 
     <div class="container mt-5">
         
-    <div class="row">
-        <div class="col-md-5">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-md-6">
             <div class="card">
-                <div class="card-body">
-                <form action="/edtuser/<%=data.Empfun%>" method="post">
+                <div class="card-body text-center">
+                <form action="/edtuser/<%= data.ID %>" method="post">
 
             
-            <div class="form-group">
-                <label class="formkit-label" for="input_0">Codigo De Usuario</label>
-                <input type="text" name="Empfun" value="<%= data.Empfun%>" disabled= "disabled"  class="form-control">
-        
+                  <div class="row">
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                <label class="formkit-label" for="input_0"><b>Codigo De Usuario</b></label>
+                <input type="text" name="ID" value="<%= data.ID %>" disabled= "disabled"  class="form-control text-center">
+              </div>
             </div>
-            <div class="form-group">
-                <label class="formkit-label" for="input_0">Usuario</label>
-                <input type="text" name="Empusu" value="<%= data.Empusu%>" disabled= "disabled" class="form-control">
-        
+            <div class="col-md-6 mb-4">
+            <div class="form-outline">
+              <label class="formkit-label" for="input_0"><b>Usuario</b></label>
+                <input type="text" name="User" value="<%= data.User %>"   class="form-control text-center">
+              </div>
             </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <div class="form-outline">
+                  <label class="formkit-label" for="input_0"><b>Password</b></label>
+              <input type="text" name="Pass" value="<%= data.Pass %>"   class="form-control text-center">
+            </div>
+          </div>
            
-            <div class="form-group">
-                <label class="formkit-label" for="input_0">Nombre Empleado</label>
-                <input type="text" name="Nusu" value="<%= data.Nusu%>" disabled= "disabled" class="form-control">
-        
+          <div class="col-md-6 mb-4">
+            <div class="form-outline">
+              <label class="formkit-label" for="input_0"><b>DPI</b></label>
+                <input type="text" name="DPI" value="<%= data.DPI %>" class="form-control text-center">
+              </div>
             </div>
-            
-            <div class="form-group">
-                <label class="formkit-label" for="input_0">Sucursal</label>
-                <input type="text" name="Sucu" value="<%= data.Sucu%>"  class="form-control">
-        
             </div>
 
-            <p> <div class="formkit-outer" data-type="select">
-                <div class="formkit-wrapper">
-                  <label class="formkit-label" for="input_0">Tipo De Usuario</label>
-                  <div class="formkit-inner">
-                    <select class="formkit-input" id="input_0" name="Rol">
-                      <option class="formkit-option" value=""></option>
-                      <option class="formkit-option" value="GR">GR</option>
-                      <option class="formkit-option" value="AS">AS</option>
-                      <option class="formkit-option" value="AD">AD</option>
-                    </select>
-                </p>
-
-            <div class="form-group">
-                <label class="formkit-label" for="input_0">Password</label>
-                <input type="text" name="Empass" value=""  class="form-control">
-        
+            <div class="row  d-flex justify-content-center align-items-center h-100">
+              <div class="form-outline col-md-7 mb-4">
+              <label class="formkit-label" for="input_0"><b>Fecha De Ingreso</b></label>
+                <input type="date" name="Fecingre" value="<%= data.Fecingre%>" class="form-control text-center">
+              </div>
             </div>
+ 
+        
+            <div class="row">
+              <div class="col-xxl-4">
+                      <label class="formkit-label" for="input_0"><b>Rol</b></label>
+                      <div class="formkit-inner">
+                        <select class="formkit-input" id="input_0" name="Rol">
+                          <option class="formkit-option text-center" value=""></option>
+                          <option class="formkit-option text-center" value="DR">Doctor</option>
+                          <option class="formkit-option text-center" value="SE">Secretaria</option>
+                          <option class="formkit-option text-center" value="SO">Soporte</option>
+                          <option class="formkit-option text-center" value="FA">Farmacia</option>
+                          <option class="formkit-option text-center" value="LA">Laboratorio</option>
+                          <option class="formkit-option text-center" value="BO">Bodega</option>
+                          <option class="formkit-option text-center" value="AD">Admisitrador</option>
+                        </select>
+                      </div>
+                    </div>
+
+                  <div class="col-xxl-4">
+                    <label class="formkit-label" for="input_0"><b>Estatus</b></label>
+                    <div class="formkit-inner">
+                      <select class="formkit-input" id="input_0" name="drestat">
+                        <option class="formkit-option text-center" value="A">Activo</option>
+                        <option class="formkit-option text-center" value="B">Baja</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="col-xxl-4">
+                        <label class="formkit-label" for="input_0"><b>Especialidad</b></label>
+                        <div class="formkit-inner">
+                          <select class="formkit-input" id="input_0" name="Dresp">
+                            <option class="formkit-option text-center" value="N/A">N/A</option>
+                            <option class="formkit-option text-center" value="GEN">General</option>
+                            <option class="formkit-option text-center" value="GIN">Ginecologia</option>
+                            <option class="formkit-option text-center" value="OBS">Obstetricia</option>
+                            <option class="formkit-option text-center" value="CAR">Cardiologia</option>
+                            <option class="formkit-option text-center" value="NEU">Neurologia</option>
+                            <option class="formkit-option text-center" value="ORT">Ortopedia</option>
+                            <option class="formkit-option text-center" value="PSI">Psicologia</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+            <p></p>
+            <p></p>
+
             <button type="submit" class="btn btn-success">
                 Guardar Cambios
             </button>

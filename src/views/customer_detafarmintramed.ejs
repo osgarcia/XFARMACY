@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <link href="/assets/img/favico.ico" rel="icon">
+
+    <title>MED | Pacientes</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  </head>
+
+  <body class="bg-dark-200">
+    <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/farmaintramed"><h1><font color="white">MED</font></h1></a>
+
+        </div>
+    </nav>               
+    
+                    <form action="/detafarmintramed/<%= data.ID %>" method="get" >
+
+
+                        <section class="vh-100" style="background-color: #ffffff;">
+                        <div class="container py-5 h-100">
+                            <div class="row d-flex justify-content-center align-items-center h-100 ">
+                                <div class="col-md-10">
+                                    <div class="card">
+                                        <div class="card-body">                 
+                                <% if (data) { %>
+                                    <% for (var i = 0; i < data.length; i++) { %>
+                              
+                              <div class="card mb-10" style="width: 1040px">
+                                <div class="row  d-flex justify-content-center align-items-center h-100">
+                                  <div class="col-md-4">
+                                    <img src="/assets/img/<%= data[i].Noprod %>.jpg" width="400" height="400">
+                                  </div>
+                                  <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h3 class="card-title text-center"><b><%= data[i].Noprod %></b></h3>
+                                        <h6>
+                                            <p></p>
+                                        <p class="card-text"><small class="text-muted"><b>Casa Medica:</b> <%= data[i].Casprod %></small></p>
+                                      <p class="card-text"><small class="text-muted"><b>Receta:</b> <%= data[i].Resprod %></small></p>   
+                                      <p class="card-text"><small class="text-muted"><b>Precio:</b> Q <%= data[i].Preprod %></small></p>
+                                      <p class="card-text"><small class="text-muted"><b>Detalle:</b> <%= data[i].Prdeta %></small></p>
+                                    </h6>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <% } %>
+                              <% } %>  
+                            </section>
+                    </form>
+                </div>
+  </body>
+</html>

@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost:8080
--- Tiempo de generación: 09-09-2023 a las 10:27:18
+-- Servidor: localhost:3306
+-- Tiempo de generación: 07-10-2023 a las 03:20:02
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
 
@@ -25,6 +25,28 @@ DELIMITER $$
 --
 -- Procedimientos
 --
+CREATE DEFINER=`` PROCEDURE `SP_ADDLAB` (IN `DI_Idcon` INT, IN `DS_Prod` VARCHAR(100), IN `DS_Casprod` VARCHAR(100), IN `DI_Cantprod` INT, IN `DD_Preprod` DECIMAL(10,2), IN `DS_Feccomp` VARCHAR(100), IN `DS_Stcompr` VARCHAR(100))   BEGIN
+    
+ START TRANSACTION;
+ 
+ 
+INSERT INTO venprod(Idcon, Prod, Casprod, Cantprod, Preprod, Feccomp, Stcompr) values(DI_Idcon, DS_Prod, DS_Casprod, DI_Cantprod, DD_Preprod, DS_Feccomp, DS_Stcompr);
+
+ COMMIT;
+ END$$
+
+CREATE DEFINER=`` PROCEDURE `SP_ADDMED` (IN `DI_Idcon` INT, IN `DS_Prod` VARCHAR(100), IN `DS_Casprod` VARCHAR(100), IN `DI_Cantprod` INT, IN `DD_Preprod` DECIMAL(10,2), IN `DS_Feccomp` VARCHAR(100), IN `DS_Stcompr` VARCHAR(100))   BEGIN
+    
+ START TRANSACTION;
+ 
+ 
+INSERT INTO venprod(Idcon, Prod, Casprod, Cantprod, Preprod, Feccomp, Stcompr) values(DI_Idcon, DS_Prod, DS_Casprod, DI_Cantprod, DD_Preprod, DS_Feccomp, DS_Stcompr);
+
+UPDATE prods set Unidisp = Unidisp - DI_Cantprod Where Noprod = DS_Prod;
+
+ COMMIT;
+ END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_CITAMEDMOVIL` (IN `DI_IDPa` INT, IN `DS_Nocli` VARCHAR(255), IN `DS_Fecconsul` VARCHAR(100), IN `DS_clihour` VARCHAR(100), IN `DS_Moticonsul` VARCHAR(255), IN `DS_Histenf` VARCHAR(255), IN `DS_Tipespec` VARCHAR(100), IN `DS_medesp` VARCHAR(100), IN `DI_IDH` INT)   BEGIN
     
     START TRANSACTION;
@@ -90,6 +112,55 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_CITAMEDMOVIL` (IN `DI_IDPa` INT,
     
     END$$
 
+CREATE DEFINER=`` PROCEDURE `SP_CONSULFACT` (IN `DI_Idcon` INT)   BEGIN
+    
+ START TRANSACTION;
+ 
+select b.Idcon, Prod, Casprod, Cantprod, Preprod, Cantprod * Preprod as Total, Clnit, Nocli from venprod a left join cliconsul b on a.Idcon = b.Idcon left join pacien c on b.IDPa = c.IDPa where b.Idcon = DI_Idcon;
+ 
+
+
+ COMMIT;
+ END$$
+
+CREATE DEFINER=`` PROCEDURE `SP_MNSECRE` ()   BEGIN
+    
+
+ 
+ START TRANSACTION;
+ 
+ select * from pacien a left join fusers b on a.climed = b.User;
+ 
+ select * from fusers a left join dochour b on a.ID = b.IDD where Dresp = "GEN" and fecaten >= current_date();
+ 
+ select * from fusers a left join dochour b on a.ID = b.IDD where Dresp <> "GEN" and fecaten >= current_date();
+ 
+ 
+ COMMIT;
+ END$$
+
+CREATE DEFINER=`` PROCEDURE `SP_UPCONSULESP` (IN `DI_Idcon` INT, IN `DS_Nocli` VARCHAR(100), IN `DS_Fecconsul` VARCHAR(100), IN `DS_stcconsul` CHAR(5))   BEGIN
+    
+ START TRANSACTION;
+ 
+ UPDATE CLICONSUL SET stcconsul = DS_stcconsul WHERE Idcon = DI_Idcon;
+ 
+INSERT INTO venprod(Idcon,  Prod, Casprod, Cantprod, Preprod, Feccomp, Stcompr) values(DI_Idcon,'CONGE','MED','1', '150.00', DS_Fecconsul, 'CGESP');
+
+ COMMIT;
+ END$$
+
+CREATE DEFINER=`` PROCEDURE `SP_UPCONSULGEN` (IN `DI_Idcon` INT, IN `DS_Nocli` VARCHAR(100), IN `DS_Fecconsul` VARCHAR(100), IN `DS_stcconsul` CHAR(5))   BEGIN
+    
+ START TRANSACTION;
+ 
+ UPDATE CLICONSUL SET stcconsul = DS_stcconsul WHERE Idcon = DI_Idcon;
+ 
+INSERT INTO venprod(Idcon,  Prod, Casprod, Cantprod, Preprod, Feccomp, Stcompr) values(DI_Idcon,'CONGE','MED','1', '100.00', DS_Fecconsul, 'CGA');
+
+ COMMIT;
+ END$$
+
 DELIMITER ;
 
 -- --------------------------------------------------------
@@ -122,23 +193,15 @@ CREATE TABLE `cliconsul` (
 --
 
 INSERT INTO `cliconsul` (`Idcon`, `IDPa`, `Empcod`, `Nocli`, `Fecconsul`, `clihour`, `Moticonsul`, `Histenf`, `Dlabs`, `Plterau`, `Refespc`, `Tipespec`, `medesp`, `Consulcome`, `Comenespeci`, `stcconsul`) VALUES
-(11, 6, 'MED', 'Maria De Los Angeles García Del Cid', '2023-08-30', '17:00', 'Nauseas y Mareos', 'Nauseas y Mareos por 3 dias tomo parecetamol', 'Y', 'Y', 'Y', 'NEU', 'Oscar Alexis García Del Cid', 'Laboratorio: Tomografia de Craneo\r\nPlan Terapeutico: Caminata de 30 Minutos, 30 Minutos de Natacion', 'Se Refiere a Neurologia por indicios de espina bifida', 'P'),
-(12, 3, 'MED', 'Oscar Alexis García Del Cid', '2023-09-04', '16:00', 'Mareo y Fatiga', 'Mareo y Fatiga', 'N', 'N', '', 'GEN', 'Jose Antonio Gonzalez Ramirez', NULL, '', 'G'),
-(13, 6, 'MED', 'Maria De Los Angeles García Del Cid', '2023-09-04', '12:00', 'Mareo y Fatiga', 'Mareo y Fatiga', 'N', 'N', 'Y', 'NEU', 'Oscar Alexis García Del Cid', '1 Inyeccion de Complejo B 2 al día', 'Se refiere a Neurologia por posible desarrme', 'P'),
-(14, 3, 'MED', 'Oscar Alexis García Del Cid', '2023-09-04', '13:00', 'Fiebre y Vomito', 'Fiebre y Vomito', 'N', 'N', '', 'GEN', 'Jose Antonio Gonzalez Ramirez', NULL, '', 'G'),
-(15, 6, 'MED', 'Maria De Los Angeles García Del Cid', '2023-09-05', '16:00', 'Nauseas y Falta de Sueño', 'Nauseas y Falta de Sueño', 'N', 'N', '', 'GEN', '', NULL, '', 'P'),
-(16, 8, 'MED', 'Jose Antonio Gonzalez Gonzalez', '2023-09-05', '16:00', 'Fatiga, Mareo y Migraña', 'Fatiga, Mareo y Migraña', 'Y', 'N', '', 'GEN', '', 'Se solicita Examen de Sangre\r\n\r\n1 inyeccion de Completjo B', '', 'A'),
-(17, 8, 'MED', 'Jose Antonio Gonzalez Gonzalez', '2023-09-05', '16:00', 'Mareo y Fatiga y Fiebre', 'Mareo y Fatiga y Fiebre', 'N', 'N', 'Y', 'NEU', 'Oscar Alexis García Del Cid', NULL, 'Se refiere por golpe de craneo', 'P'),
-(19, 3, 'MED', 'Oscar Alexis García Del Cid', '2023-09-05', '12:00', 'Dolor de Cabeza y Fiebre', 'Dolor de Cabeza y Fiebre', 'N', 'N', '', 'GEN', 'Jose Antonio Gonzalez Ramirez', NULL, '', 'G'),
-(20, 3, 'MED', 'Oscar Alexis García Del Cid', '2023-09-05', '13:00', 'Dolor de Cabeza y Fiebre Aguda', 'Dolor de Cabeza y Fiebre Aguda', 'N', 'N', '', 'GEN', 'Jose Antonio Gonzalez Ramirez', NULL, '', 'G'),
-(21, 3, 'MED', 'Oscar Alexis García Del Cid', '2023-09-05', '07:00', 'Dolor de Gargante y Tos', 'Dolor de Gargante y Tos', 'N', 'N', '', 'GEN', 'Jose Antonio Gonzalez Ramirez', NULL, '', 'G'),
-(22, 3, 'MED', 'Oscar Alexis García Del Cid', '2023-09-05', '09:00', 'Malestar estomacal', 'Dolor despues de comer tacos al pastor', 'N', 'N', '', 'GEN', 'Jose Antonio Gonzalez Ramirez', NULL, '', 'G'),
-(23, 3, 'MED', 'Oscar Alexis García Del Cid', '2023-09-05', '08:00', 'Dolor de cabeza y Vomito', 'Dolor de cabeza y Vomito', 'N', 'N', '', 'GEN', 'Jose Antonio Gonzalez Ramirez', NULL, '', 'G'),
-(24, 3, 'MED', 'Oscar Alexis García Del Cid', '2023-09-06', '07:00', 'Dolor de Espalda ', 'Dolor de Espalda Jugando Footbal', 'N', 'N', '', 'GEN', 'Jose Antonio Gonzalez Ramirez', NULL, '', 'G'),
-(25, 3, 'MED', 'Oscar Alexis García Del Cid', '2023-09-06', '08:00', 'Sangrado De Ojos', 'Accidente con acido en el trabajo', 'N', 'N', '', 'GEN', 'Jose Antonio Gonzalez Ramirez', NULL, '', 'G'),
-(26, 4, 'MED', 'Gabriel Oscar Adrian García Cua', '2023-09-06', '09:00', 'Dermatitis y Hongos en los pies', 'Picason insesante despues de ir a piscinas.', 'N', 'N', '', 'GEN', 'Jose Antonio Gonzalez Ramirez', NULL, '', 'G'),
-(27, 3, 'MED', 'Oscar Alexis García Del Cid', '2023-09-08', '14:00', 'Dolor de Cabeza y Nauseas', 'Dolor de Cabeza y Nauseas', 'N', 'N', '', 'GEN', 'Jose Antonio Gonzalez Ramirez', NULL, '', 'G'),
-(28, 6, 'MED', 'Maria De Los Angeles García Del Cid', '2023-09-08', '13:00', 'Dolor de Rodillas', 'Dolor de Rodillas', 'Y', 'N', '', 'GEN', '', 'Paracetamol 1 cada 6 horas\r\nLaboratorio: Examen de acido lactico', '', 'A');
+(50, 14, 'MED', 'Carlos Alejandro Cruz Ramirez', '2023-09-29', '07:00', 'Dolor De Estomago', 'Dolor de estamago desde hace 2 dias despues de comer churrasco en la calle', 'N', 'N', '', 'GEN', '', 'Farmacia: Desparacitante y Purgante.', '', 'P'),
+(51, 14, 'MED', 'Carlos Alejandro Cruz Ramirez', '2023-09-29', '10:00', 'Dolor De Cabeza', 'Dolor De Cabeza', 'N', 'N', '', 'GEN', '', 'Farmacia: Doloneurobion 1 cada 12 horas', '', 'P'),
+(52, 14, 'MED', 'Carlos Alejandro Cruz Ramirez', '2023-09-30', '07:00', 'Dolor de Cabeza y Mareos', 'Dolor de Cabeza luego de caida por gradas.', 'Y', 'N', 'Y', 'NEU', 'Oscar Alexis García Del Cid', 'Laboratorio: Radiografia De Cabeza\r\n\r\nFarmacia: Paracetamol y Desimflamatorios Dosis para 2 días', '', 'P'),
+(53, 11, 'MED', 'Floricelda Del Cid Mayen', '2023-09-30', '11:00', 'Dolor de Cabeza y Perdida de Fuerza', 'Paciente tiene enfermedad de tiroides', 'N', 'N', '', 'GEN', '', 'Farmacia: Tratamiento contra la tirodies casa media Fyser', '', 'P'),
+(54, 17, 'MED', 'Gustavo García Cortez', '2023-09-30', '11:00', 'Dolor de Rodilla Intenso', 'Dolor de rodilla paciente subrio caida hace 2 dias', 'Y', 'N', '', 'GEN', '', 'Farmacia: Desimflamatorios por 2 días\r\n\r\nLaboratorio: Radiografia de Rodilla', '', 'P'),
+(55, 8, 'MED', 'Jose Antonio Gonzalez Gonzalez', '2023-09-30', '14:00', 'Tos seca y dolor de Garganta', 'Sintomas durante 3 días ', 'N', 'N', '', 'GEN', '', 'Farmacia: Salbutamol en spray utilizar por 1 semana', '', 'P'),
+(56, 13, 'MED', 'Carlos Ivan Del Cid Mayen', '2023-09-30', '16:00', 'Dificultad para respirar', 'Golpe en pecho tras caer de motocicleta', 'N', 'N', '', 'GEN', '', 'Farmacia: Crema Lubriderm para mesaje en pecho 2 veces al dia.', '', 'FL'),
+(58, 14, 'MED', 'Carlos Alejandro Cruz Ramirez', '2023-10-01', '14:00', 'Fuerte dolor de cabeza se expande por toda la columna', 'Fuerta dolor desde caida por gradas hace 2 dias.', 'Y', 'N', 'Y', 'NEU', 'Oscar Alexis García Del Cid', 'Farmacia: Desinflamante 1 cada 12 horas por 5 días\r\n\r\nLaboratorio: Tomografia de craneo', '', 'L'),
+(59, 20, 'MED', 'Miguel Angel Asturias', '2023-10-04', '07:00', 'Dolor de Cuerpo y Estomago', 'Dolor intenso por 3 dias despues de fuerte lluvia', 'N', 'N', '', 'GEN', '', 'Farmacia: Paracetamol 1 capsula cada 6 horas por 5 dias.', '', 'P');
 
 -- --------------------------------------------------------
 
@@ -212,7 +275,14 @@ INSERT INTO `dochour` (`IDH`, `IDD`, `Empcod`, `Ndoc`, `Hdoc1`, `Hdoc2`, `Hdoc3`
 (11, 4, 'MED', 'Jose Antonio Gonzalez Ramirez', ' ', ' ', ' ', '', '', ' ', ' ', '', '', '', '', '2023-09-05'),
 (12, 3, 'MED', 'Oscar Alexis García Del Cid', '', '', '', '', '', '14:00', '15:00', '16:00', '', '', '', '2023-09-05'),
 (13, 4, 'MED', 'Jose Antonio Gonzalez Ramirez', ' ', ' ', ' ', '10:00', '11:00', '12:00', '13:00', '14:00', '', '', '', '2023-09-06'),
-(14, 4, 'MED', 'Jose Antonio Gonzalez Ramirez', '', '', '', '', '', '', '', ' ', '15:00', '', '', '2023-09-08');
+(14, 4, 'MED', 'Jose Antonio Gonzalez Ramirez', '', '', '', '', '', '', '', ' ', '15:00', '', '', '2023-09-08'),
+(15, 3, 'MED', 'Oscar Alexis García Del Cid', '08:00', '09:00', '', '', '', '', '', '', '', '', '', '2023-09-12'),
+(16, 4, 'MED', 'Jose Antonio Gonzalez Ramirez', ' ', ' ', '', '', '', '', '', '', '', '', '', '2023-09-12'),
+(17, 3, 'MED', 'Oscar Alexis García Del Cid', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '', '', '', '', '2023-09-19'),
+(18, 2, 'MED', 'Gabriel Adrían García Cua', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '', '14:00', '15:00', '16:00', '17:00', '2023-09-19'),
+(19, 5, 'MED', 'Gabriela Alicia Cua Ortega', '07:00', '', '', '10:00', '', '', '', '', '', '', '', '2023-09-19'),
+(20, 2, 'MED', 'Gabriel Adrían García Cua', '', '', '', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '2023-09-24'),
+(21, 4, 'MED', 'Jose Antonio Gonzalez Ramirez', '', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '2023-10-04');
 
 -- --------------------------------------------------------
 
@@ -227,6 +297,8 @@ CREATE TABLE `fusers` (
   `User` varchar(100) DEFAULT NULL,
   `Pass` varchar(100) DEFAULT NULL,
   `DPI` bigint(20) DEFAULT NULL,
+  `Nacuser` varchar(100) NOT NULL,
+  `Fecnac` varchar(100) NOT NULL,
   `Fecingre` varchar(255) DEFAULT NULL,
   `Rol` varchar(10) DEFAULT NULL,
   `Dresp` varchar(20) DEFAULT NULL,
@@ -237,10 +309,34 @@ CREATE TABLE `fusers` (
 -- Volcado de datos para la tabla `fusers`
 --
 
-INSERT INTO `fusers` (`ID`, `Empcod`, `Nuser`, `User`, `Pass`, `DPI`, `Fecingre`, `Rol`, `Dresp`, `drestat`) VALUES
-(2, 'MED', 'Gabriel Adrían García Cua', 'ggarcia', '$2a$08$jnzxTwc9fxd.6aUd933skO6l4acWurpxhG5YsjmeQ.PemHrz5h18u', 212598677901, '2023-07-19', 'DR', 'CAR', ''),
-(3, 'MED', 'Oscar Alexis García Del Cid', 'odelcid', '$2a$08$1w3OvW5J.8QoIEfxbpNGkOVzg9wYHDDqMT2XoBF238hgrvCxspIHa', 2125915760101, '2023-08-29', 'DR', 'NEU', ''),
-(4, 'MED', 'Jose Antonio Gonzalez Ramirez', 'jgonzalez', '$2a$08$.Dwn5E.6TpHHViuFoJnMUeOrFJwFo/Nf6RbeLcc7xkvYG7Uy7jfKq', 2125916770101, '2023-08-29', 'DR', 'GEN', '');
+INSERT INTO `fusers` (`ID`, `Empcod`, `Nuser`, `User`, `Pass`, `DPI`, `Nacuser`, `Fecnac`, `Fecingre`, `Rol`, `Dresp`, `drestat`) VALUES
+(2, 'MED', 'Gabriel Adrían García Cua', 'ggarcia', '$2a$08$jnzxTwc9fxd.6aUd933skO6l4acWurpxhG5YsjmeQ.PemHrz5h18u', 212598677901, '', '', '2023-07-19', 'DR', 'CAR', 'A'),
+(3, 'MED', 'Oscar Alexis García Del Cid', 'odelcid', '$2a$08$1w3OvW5J.8QoIEfxbpNGkOVzg9wYHDDqMT2XoBF238hgrvCxspIHa', 2125915760101, '', '', '2023-08-29', 'DR', 'NEU', 'A'),
+(4, 'MED', 'Jose Antonio Gonzalez Ramirez', 'jgonzalez', '$2a$08$.Dwn5E.6TpHHViuFoJnMUeOrFJwFo/Nf6RbeLcc7xkvYG7Uy7jfKq', 2125916770101, '', '', '2023-08-29', 'DR', 'GEN', 'A'),
+(5, 'MED', 'Gabriela Alicia Cua Ortega', 'gcortega', '$2a$08$oJ6jrdrMLILhywrDUbnhz.DhO1A4odpkfA0jJTXy9LU6TjP94fvje', 1861911210101, '', '', '2023-09-19', 'DR', 'PSI', 'A'),
+(7, 'MED', 'Pablo Ivan Pineda Cortez', 'ppineda', '$2a$08$Soe/z6m7dW6.78OTlG5npetTmryJoWwOGCrU5RMoBqj7DWjRy530u', 2125816790101, '', '', '2023-09-30', 'SO', 'N/A', 'A');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `labs`
+--
+
+CREATE TABLE `labs` (
+  `ID` bigint(20) NOT NULL,
+  `Nolab` varchar(100) NOT NULL,
+  `Prelab` decimal(10,2) NOT NULL,
+  `Labdeta` varchar(100) NOT NULL,
+  `Stlab` char(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `labs`
+--
+
+INSERT INTO `labs` (`ID`, `Nolab`, `Prelab`, `Labdeta`, `Stlab`) VALUES
+(1, 'Resonancia Magnetica', 300.00, 'Resonancia Espacial para Detectar Analias como cancer o heridas internas.', 'N'),
+(2, 'Tomografia Creano', 450.00, 'Utilizada para tener detalles del cerebro en busqueda de anomalias.', 'D');
 
 -- --------------------------------------------------------
 
@@ -253,8 +349,16 @@ CREATE TABLE `pacien` (
   `Empcod` varchar(10) NOT NULL DEFAULT 'MED',
   `Noclie` varchar(50) DEFAULT NULL,
   `Cliedad` int(11) DEFAULT NULL,
+  `Cldpi` bigint(100) NOT NULL,
+  `Clnit` varchar(20) NOT NULL,
   `Fecna` varchar(100) DEFAULT NULL,
   `Sexo` char(1) DEFAULT NULL,
+  `Clnac` varchar(100) NOT NULL,
+  `Cldomi` varchar(255) NOT NULL,
+  `Cldepto` varchar(100) NOT NULL,
+  `Clmuni` varchar(100) NOT NULL,
+  `Clcel` bigint(100) NOT NULL,
+  `Cltel` bigint(100) NOT NULL,
   `clidia` char(1) DEFAULT NULL,
   `clipre` char(1) DEFAULT NULL,
   `clihipe` char(1) DEFAULT NULL,
@@ -273,10 +377,19 @@ CREATE TABLE `pacien` (
 -- Volcado de datos para la tabla `pacien`
 --
 
-INSERT INTO `pacien` (`IDPa`, `Empcod`, `Noclie`, `Cliedad`, `Fecna`, `Sexo`, `clidia`, `clipre`, `clihipe`, `clitipsa`, `climed`, `cliquiru`, `clitrauma`, `clialerg`, `clihistobst`, `clihabit`, `clistat`, `cliotr`) VALUES
-(6, 'MED', 'Maria De Los Angeles García Del Cid', 30, '1993-08-29', 'F', 'N', 'N', 'N', 'O-', 'odelcid', 'Y', 'N', 'N', 'No Aplica', 'N', 'GEN', 'Cirugia De Nariz'),
-(7, 'MED', 'Karla Viviana García Del Cid', 28, '1995-04-29', 'F', 'N', 'N', 'N', 'O+', 'odelcid', 'N', 'N', 'Y', 'No Aplica', 'N', 'GEN', 'Paciente Alergico a la Penicilina'),
-(8, 'MED', 'Jose Antonio Gonzalez Gonzalez', 34, '2023-09-05', 'M', 'N', 'N', 'N', 'O+', 'odelcid', 'Y', 'N', 'Y', 'No aplica', 'N', 'GEN', 'Cirugias: Apendice\r\nAlergias: Penisina');
+INSERT INTO `pacien` (`IDPa`, `Empcod`, `Noclie`, `Cliedad`, `Cldpi`, `Clnit`, `Fecna`, `Sexo`, `Clnac`, `Cldomi`, `Cldepto`, `Clmuni`, `Clcel`, `Cltel`, `clidia`, `clipre`, `clihipe`, `clitipsa`, `climed`, `cliquiru`, `clitrauma`, `clialerg`, `clihistobst`, `clihabit`, `clistat`, `cliotr`) VALUES
+(6, 'MED', 'Maria De Los Angeles García Del Cid', 30, 0, '0', '1993-08-29', 'F', '', '', '', '', 0, 0, 'N', 'N', 'N', 'O-', 'odelcid', 'Y', 'N', 'N', 'No Aplica', 'N', 'GEN', 'Cirugia De Nariz'),
+(7, 'MED', 'Karla Viviana García Del Cid', 28, 0, '0', '1995-04-29', 'F', '', '', '', '', 0, 0, 'N', 'N', 'N', 'O+', 'odelcid', 'N', 'N', 'Y', 'No Aplica', 'N', 'GEN', 'Paciente Alergico a la Penicilina'),
+(8, 'MED', 'Jose Antonio Gonzalez Gonzalez', 34, 0, '0', '2023-09-05', 'M', '', '', '', '', 0, 0, 'N', 'N', 'N', 'O+', 'odelcid', 'Y', 'N', 'Y', 'No aplica', 'N', 'GEN', 'Cirugias: Apendice\r\nAlergias: Penisina'),
+(10, 'MED', 'Roberto Rosales', 21, 0, '0', '1990-12-16', 'M', '', '', '', '', 0, 0, 'N', 'N', 'N', 'O+', 'odelcid', 'N', 'N', 'Y', 'No Aplica', 'N', 'GEN', 'Alergias: Paracetamol'),
+(11, 'MED', 'Floricelda Del Cid Mayen', 57, 0, '0', '2023-09-20', 'F', '', '', '', '', 0, 0, 'N', 'Y', 'N', 'O+', 'odelcid', 'N', 'N', 'N', '3 Hijos', 'N', 'GEN', 'Paciente con problemas de Tiroides'),
+(12, 'MED', 'Kevin Ovidio Lopez Campos', 31, 0, '0', '2023-09-22', 'M', '', '', '', '', 0, 0, 'Y', 'N', 'N', 'AB+', 'ggarcia', 'N', 'N', 'N', 'No Aplica', 'N', 'GEN', 'Diabetes Tipo 2'),
+(13, 'MED', 'Carlos Ivan Del Cid Mayen', 38, 0, '0', '2023-09-22', 'M', '', '', '', '', 0, 0, 'N', 'N', 'N', 'A+', 'odelcid', 'N', 'N', 'N', 'No Aplica', 'N', 'GEN', 'Apnea del Sueño'),
+(14, 'MED', 'Carlos Alejandro Cruz Ramirez', 28, 2125915760101, '7040370-8', '2023-09-22', 'M', 'Guatemalteco', 'Casa 2 M Colinas Del Norte 2', 'Guatemala', 'San Jose Del Golfo', 54986981, 41541698, 'N', 'N', 'N', 'A+', 'odelcid', 'N', 'N', 'N', 'No Aplica', 'N', 'GEN', 'Ninguno'),
+(15, 'MED', 'Luis Fernando Gomez Valenzuela', 32, 0, '0', '2023-09-22', 'M', '', '', '', '', 0, 0, 'N', 'N', 'N', 'B+', 'ggarcia', 'Y', 'N', 'N', 'No Aplica', 'N', 'GEN', 'Cirigua de Rodilla'),
+(16, 'MED', 'Vitalina Cortez Aguilar', 85, 0, '0', '2023-09-22', 'F', '', '', '', '', 0, 0, 'N', 'Y', 'N', 'O+', 'odelcid', 'Y', 'N', 'N', '2 Hijos', 'N', 'GEN', 'Cirugia de mama, Cancer de mama'),
+(17, 'MED', 'Gustavo García Cortez', 44, 0, '0', '2023-09-22', 'M', '', '', '', '', 0, 0, 'N', 'N', 'N', 'O+', 'odelcid', 'N', 'N', 'N', 'No Aplica', 'N', 'GEN', 'Ninguno'),
+(20, 'MED', 'Miguel Angel Asturias', 50, 0, '', '1973-03-04', 'M', '', '', '', '', 0, 0, 'N', 'N', 'N', 'O+', 'jgonzalez', 'N', 'N', 'Y', 'No Aplica', 'N', 'GEN', 'Alergias: Penicilina');
 
 -- --------------------------------------------------------
 
@@ -289,18 +402,21 @@ CREATE TABLE `prods` (
   `Noprod` varchar(100) DEFAULT NULL,
   `Casprod` varchar(100) DEFAULT NULL,
   `Resprod` char(5) DEFAULT NULL,
-  `Preprod` decimal(10,0) DEFAULT NULL,
+  `Preprod` decimal(10,2) DEFAULT NULL,
   `Unidisp` int(11) DEFAULT NULL,
-  `Improd` text DEFAULT NULL
+  `Prdeta` varchar(255) NOT NULL,
+  `Fecingrep` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `prods`
 --
 
-INSERT INTO `prods` (`ID`, `Noprod`, `Casprod`, `Resprod`, `Preprod`, `Unidisp`, `Improd`) VALUES
-(1, 'Salbutamol', 'Galoxona', 'N', '60', 20, 'NO'),
-(2, 'Lubriderm', 'Meycos', 'N', '20', 100, 'Image (4).jpg');
+INSERT INTO `prods` (`ID`, `Noprod`, `Casprod`, `Resprod`, `Preprod`, `Unidisp`, `Prdeta`, `Fecingrep`) VALUES
+(1, 'Salbutamol', 'Galoxona', 'N', 60.00, 20, 'Jarabe Espectorante Descongestiona y Alivia los Pulmones Dosis Recomendada: 1 Cucharada Cada 8 Horas', '2023-10-01'),
+(2, 'Lubriderm', 'Meycos', 'N', 20.00, 97, 'Crema hidratante Efectiva contra quemaduras del sol previene y reduce los efectos de la exposicion prolongada al sol', '2023-10-01'),
+(3, 'Paracetamol', 'Pfizer', 'N', 10.00, 98, 'Medicamento para dolor intenso de cabeza blister 10 capsulas 600 mg.', '2023-10-01'),
+(4, 'Crema Sana Sana', 'Pfizer', 'N', 50.00, 100, 'Creama para golpes', '2023-10-04');
 
 -- --------------------------------------------------------
 
@@ -310,14 +426,43 @@ INSERT INTO `prods` (`ID`, `Noprod`, `Casprod`, `Resprod`, `Preprod`, `Unidisp`,
 
 CREATE TABLE `venprod` (
   `ID` bigint(20) NOT NULL,
-  `Clnomb` varchar(100) DEFAULT NULL,
-  `Nit` varchar(50) DEFAULT NULL,
+  `Idcon` bigint(20) NOT NULL,
   `Prod` varchar(100) DEFAULT NULL,
   `Casprod` varchar(100) DEFAULT NULL,
   `Cantprod` int(11) DEFAULT NULL,
-  `Preprod` decimal(10,0) DEFAULT NULL,
+  `Preprod` decimal(10,2) DEFAULT NULL,
+  `Feccomp` varchar(100) NOT NULL DEFAULT current_timestamp(),
   `Stcompr` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `venprod`
+--
+
+INSERT INTO `venprod` (`ID`, `Idcon`, `Prod`, `Casprod`, `Cantprod`, `Preprod`, `Feccomp`, `Stcompr`) VALUES
+(4, 49, 'CONGE', 'MED', 1, 100.00, '2023-09-27', 'CGA'),
+(5, 47, 'CONGE', 'MED', 1, 100.00, '2023-09-28', 'CGA'),
+(6, 50, 'CONGE', 'MED', 1, 100.00, '2023-09-29', 'CGA'),
+(7, 50, 'Purgante ', 'Meycos', 1, 40.00, '2023-09-28', 'CGF'),
+(8, 50, 'Desparacitante', 'Meycos', 2, 10.00, '2023-09-28', 'CGF'),
+(9, 50, 'Paracetamol', 'Galoxona', 1, 50.00, '2023-09-28', 'CGF'),
+(10, 51, 'CONGE', 'MED', 1, 100.00, '2023-09-29', 'CGA'),
+(11, 51, 'Doloneurobion', 'Galoxona', 2, 10.00, '2023-09-28', 'CGF'),
+(13, 52, 'Paracetamol', 'Myecos', 1, 60.00, '2023-09-29', 'CGF'),
+(14, 52, 'Desinflamatorio', 'Fyser', 5, 8.00, '2023-09-29', 'CGF'),
+(15, 53, 'Tiroidea', 'Fyser', 2, 120.00, '2023-09-30', 'CGF'),
+(17, 54, 'CONGE', 'MED', 1, 100.00, '2023-09-30', 'CGA'),
+(18, 55, 'CONGE', 'MED', 1, 100.00, '2023-09-30', 'CGA'),
+(19, 54, 'Desimflamatorio', 'Nativa', 7, 5.00, '2023-09-30', 'CGF'),
+(20, 55, 'Salbutamol Spay', 'Galoxina', 1, 160.00, '2023-09-30', 'CGF'),
+(24, 52, 'Lubriderm', 'Meycos', 2, 20.00, '2023-09-30', 'CGF'),
+(25, 56, 'CONGE', 'MED', 1, 100.00, '2023-09-30', 'CGA'),
+(26, 56, 'Lubriderm', 'Meycos', 3, 20.00, '2023-09-30', 'CGF'),
+(27, 58, 'CONGE', 'MED', 1, 150.00, '2023-10-01', 'CGA'),
+(28, 58, 'Desinfalmante', 'Meycos', 1, 40.00, '2023-10-01', 'CGF'),
+(31, 58, 'Tomografia', 'MED', 1, 450.00, '2023-10-04', 'CGL'),
+(32, 59, 'CONGE', 'MED', 1, 100.00, '2023-10-04', 'CGA'),
+(33, 59, 'Paracetamol', 'Meycos', 2, 20.00, '2023-10-04', 'CGF');
 
 --
 -- Índices para tablas volcadas
@@ -348,6 +493,12 @@ ALTER TABLE `fusers`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indices de la tabla `labs`
+--
+ALTER TABLE `labs`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- Indices de la tabla `pacien`
 --
 ALTER TABLE `pacien`
@@ -373,7 +524,7 @@ ALTER TABLE `venprod`
 -- AUTO_INCREMENT de la tabla `cliconsul`
 --
 ALTER TABLE `cliconsul`
-  MODIFY `Idcon` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `Idcon` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT de la tabla `cliusers`
@@ -385,31 +536,37 @@ ALTER TABLE `cliusers`
 -- AUTO_INCREMENT de la tabla `dochour`
 --
 ALTER TABLE `dochour`
-  MODIFY `IDH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `IDH` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `fusers`
 --
 ALTER TABLE `fusers`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT de la tabla `labs`
+--
+ALTER TABLE `labs`
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `pacien`
 --
 ALTER TABLE `pacien`
-  MODIFY `IDPa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `IDPa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `prods`
 --
 ALTER TABLE `prods`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `venprod`
 --
 ALTER TABLE `venprod`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

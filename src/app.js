@@ -36,16 +36,16 @@ app.set('views', path.join(__dirname, 'views'));
 
 
 
-//middlewares
+
+//Middlewares
 app.use(morgan('dev'));
 app.use(myConnection(mysql, {
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    port: process.env.DB_PORT,
-    database: 'xfarmacy',
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    port: 3306,
+    database: 'xfarmacy'
 }, 'single'));
-
 app.use(express.urlencoded({extended: false}));
 
 app.use(express.static('public'));

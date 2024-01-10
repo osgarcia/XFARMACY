@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>MED | Medicamentos</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    
+  </head>
+  <body class="bg-dark-200">
+    <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/reflab"><h1><font color="white">MED</font></h1></a>
+          <div class="collapse navbar-collapse" id="navbarColor03">
+            <ul class="navbar-nav me-auto">
+
+              
+          </div>
+        </div>
+      </nav>
+
+<div class="container">
+<div class="row mt-5">
+<div class="col-md-7">
+    <form>
+
+    <table class="table table-bordered table-hover text-center">
+        <thead>
+            <tr>
+                <th>
+                    No. Consulta
+                </th>
+                <th>
+                    Producto
+                </th>
+                <th>
+                    Casa Medica
+                </th>
+                <th>
+                    Cantidad
+                </th>
+                <th>
+                    Precio Unitario
+                </th>
+                <th>
+                    Total
+                </th>       
+            </tr>
+        </thead>
+
+        <tbody> 
+         
+<% if (data) { %>
+    <% for (var i = 0; i < data.length; i++) { %>
+        
+    <tr>
+
+        <td><%= data[i].Idcon %></td>
+        <td><%= data[i].Prod %></td>
+        <td><%= data[i].Casprod %></td>
+        <td><%= data[i].Cantprod %></td>
+        <td><%= data[i].Preprod %></td>
+        <td><%= data[i].Total %></td>
+       
+    </tr>
+   
+    <% } %>
+    <% } %>
+        </tbody>
+
+    </table>
+    </div>
+</form>
+
+    <div class="col-md-5">
+<div class="card text-center">
+    <div class="card-body text-center">
+        <b><label class="formkit-label" for="input_0"><h5>Agregar Productos</h5></label></b>
+        <form action="/addlab/<%= data.Idcon %>" method="post">
+
+            <div class="form-group">
+                <input type="text" name="Idcon"   value="<%=data.Idcon%>"  class="form-control">
+        
+            </div>
+            
+ 
+            <div class="form-group">
+                <input type="text" name="Prod" placeholder="Laboratorio" class="form-control">
+        
+            </div>
+
+            <div class="form-group">
+                <input type="text" name="Casprod" value="MED" style="display:none" class="form-control">
+        
+            </div>
+            <div class="form-group">
+                <input type="number" name="Cantprod" placeholder="Cantidad" class="form-control">
+        
+            </div>
+            
+            <div class="form-group">
+                <input type="number" name="Preprod" placeholder="Precio Unitario(Q)" class="form-control">
+        
+            </div>
+
+            <div class="form-group">
+                <input type="date" name="Feccomp"  class="form-control text-center">
+        
+            </div>
+
+            <div class="form-group">
+                <input type="tex" name="Stcompr"  value="CGL" style="display:none" class="form-control">
+        
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                Agregar
+            </button>
+    
+           
+           
+        </form>
+    </div>
+</div>
+    </div>
+</div>
+</div>
+
+  </body>
+</html>

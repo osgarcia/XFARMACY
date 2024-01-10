@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <link href="/assets/img/favico.ico" rel="icon">
+    
+    <title>MED | Principal</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/datetime/1.5.1/css/dataTables.dateTime.min.css">
+
+  </head>
+  <body class="bg-dark-200">
+    <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/menadmin/<%= User %>#about"><h1><font color="white">MED</font></h1></a>
+          <div class="collapse navbar-collapse" id="navbarColor03">
+            <ul class="navbar-nav me-auto">
+            </ul>
+          </div>
+        </div>
+    </nav>
+
+      <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-14">
+                <div class="card">
+                    <div class="card-body">
+
+                        <form action="/viewreprod" method="get">
+                            <b><label class="formkit-label" for="input_0"><h5>Productos</h5></label></b>
+                            <table border="0" cellspacing="5" cellpadding="5">
+                                <tbody><tr>
+                                    <td>Fecha Inicial:</td>
+                                    <td><input type="text" id="min" name="min"></td>
+                                </tr>
+                                <tr>
+                                    <td>Fecha Final:</td>
+                                    <td><input type="text" id="max" name="max"></td>
+                                </tr>
+                            </tbody></table>
+                            
+                             <p>
+                                <table id = "pacientes" class="table table-bordered table-hover text-center">
+                                    <thead>
+                                        <tr class="table-dark">
+                                            <th class="text-center">
+                                                Producto
+                                            </th>
+                                            <th class="text-center">
+                                                Casa Medica
+                                            </th>
+                                            <th class="text-center">
+                                                Necesita Receta
+                                            </th>
+                                            <th>
+                                                Precio
+                                            </th >
+                                            <th class="text-center">
+                                                Unidades Disponibles
+                                            </th>
+                                            <th class="text-center">
+                                                Fecha De Ingreso
+                                            </th>
+     
+                                    </thead>
+                        </p>
+
+                        <tbody> 
+                            <% if (data) { %>
+                                <% for (var i = 0; i < data.length; i++) { %>
+                                <tr>
+                            
+                                    <td><%= data[i].Noprod %></td>
+                                    <td><%= data[i].Casprod %></td>
+                                    <td><%= data[i].Resprod %></td>
+                                    <td>Q <%= data[i].Preprod %></td>
+                                    <td><%= data[i].Unidisp %></td>
+                                    <td><%= data[i].Fecingrep %></td>
+                                </tr>
+                                <% } %>
+                                <% } %>
+                                    </tbody>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
+    <script src="https://cdn.datatables.net/datetime/1.5.1/js/dataTables.dateTime.min.js"></script>
+    
+    
+
+
+    <script>
+        let minDate, maxDate;
+
+// Custom filtering function which will search data in column four between two values
+DataTable.ext.search.push(function (settings, data, dataIndex) {
+ let min = minDate.val();
+ let max = maxDate.val();
+ let date = new Date(data[5]);
+
+ if (
+     (min === null && max === null) ||
+     (min === null && date <= max) ||
+     (min <= date && max === null) ||
+     (min <= date && date <= max)
+ ) {
+     return true;
+ }
+ return false;
+});
+
+// Create date inputs
+minDate = new DateTime('#min', {
+ format: 'DD/MM/YYYY'
+});
+maxDate = new DateTime('#max', {
+ format: 'DD/MM/YYYY'
+});
+
+// DataTables initialisation
+let table = new DataTable('#pacientes', {
+pageLength: 10000000000000000000000,
+        lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'Todos']],
+        language: {
+            url: '//cdn.datatables.net/plug-ins/1.13.5/i18n/es-ES.json',
+        },
+        dom: 'Bfrtip',
+
+buttons: [
+
+{
+extend: 'pdf',
+text: '<i class="fa-solid fa-file-pdf fa-2xl" style="color: #f00a0a;"></i>',
+titleAtrr: 'Exportar a PDF',
+classNme: 'btn btn-success',
+exportOptions: {
+    modifier: {
+        page: 'current'
+    }
+}
+},
+
+{
+extend: 'excel',
+text: '<i class="fa-solid fa-file-excel fa-2xl" style="color: #008f0a;"></i>',
+titleAtrr: 'Exportar a Excel',
+classNme: 'btn btn-success',
+exportOptions: {
+    modifier: {
+        page: 'current'
+    }
+}
+},
+
+{
+extend: 'csv',
+text: '<i class="fa-solid fa-file-csv fa-2xl" style="color: #01000a;"></i>',
+titleAtrr: 'Exportar a CSV',
+classNme: 'btn btn-success',
+exportOptions: {
+    modifier: {
+        page: 'current'
+    }
+}
+},
+]
+});
+
+// Refilter the table
+document.querySelectorAll('#min, #max').forEach((el) => {
+ el.addEventListener('change', () => table.draw());
+});
+    </script>
+
+  </body>
+</html>

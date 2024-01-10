@@ -6,7 +6,7 @@
     <link href="/assets/img/favico.ico" rel="icon">
 
     <title>MED | Pacientes</title>
-    <link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.min.css">
+    <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -15,165 +15,196 @@
   <body class="bg-dark-200">
     <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#"><h1><font color="white">MED</font></h1></a>
+          <a class="navbar-brand" href="/prods/<%= User %>#about"><h1><font color="white">MED</font></h1></a>
 
         </div>
     </nav>
 
     <div class="container mt-5" >
         <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-md-5 ">
+        <div class="col-md-7">
             <div class="card ">
-                <div class="card-body text-center">
+                <div class="card-body p-5 shadow-5 text-center">
                     <b><label class="formkit-label" for="input_0"><h5>Datos Paciente</h5></label></b>
-                    <form action="/cprod/" method="post" >
-            
+                    <form action="/cprod/<%= User %>" method="post" >
+                    <p>
+                      
+                    </p>
                         
 
-                        <div class="form-group">
-                            
-                            <input type="text" name="Noclie" placeholder="Paciente"   class="form-control">
+                      <div class="row">
+                        <div class="col-md-6 mb-4">
+                          <div class="form-outline">
+                            <input type="text" name="Noclie" placeholder="Paciente"   required class="form-control text-center">
+                        </div>
                         </div>
                     
-                        <div class="form-group">
-                            <input type="number" name="Cliedad" placeholder="Edad" class="form-control">
-                    
+                        <div class="col-md-6 mb-4">
+                          <div class="form-outline">
+                            <input type="number" name="Cliedad" placeholder="Edad" required class="form-control text-center">
+                          </div>
                         </div>
+                      </div>
 
-                        <div class="form-group">
-                            <input type="date" name="Fecna" placeholder="Fecha De Nacimiento" class="form-control">
-                    
+                      <div class="row">
+                        <div class="col-md-6 mb-4">
+                          <div class="form-outline">
+                            <label class="form-label" for="form3Example1"><b>Fecha De Nacimento</b></label>
+                            <input type="date" name="Fecna"  required class="form-control text-center">
+                          </div>
                         </div>
-
-                        <p> <div class="formkit-outer" data-type="select">
-                            <div class="formkit-wrapper">
-                              <label class="formkit-label" for="input_0">Sexo</label>
-                              <div class="formkit-inner">
-                                <select class="formkit-input" id="input_0" name="Sexo">
-                                  <option class="formkit-option" value=""></option>
-                                  <option class="formkit-option" value="M">Masculino</option>
-                                  <option class="formkit-option" value="F">Femenimo</option>
-                                  
-                                </select>
-                              </div>
-
-                        <p> <div class="formkit-outer" data-type="select">
-                            <div class="formkit-wrapper">
-                              <label class="formkit-label" for="input_0">Diabetico</label>
-                              <div class="formkit-inner">
-                                <select class="formkit-input" id="input_0" name="clidia">
+                    
+                      <div class="col-md-6 mb-4">
+                         <div class="form-outline">
+                              <fieldset>
+                                <label class="form-label" for="form3Example1"><b>Genero:</b></label>
+                                <p>
+                                <div>
+                                  <input type="radio"  name="Sexo" value="M" checked />
+                                  <label>Masculino</label> 
+                                
+                                  <input type="radio"  name="Sexo" value="F" />
+                                  <label>Femenino</label>
+                                </div>
+                                </fieldset>
+                            </div>
+                          </div>
+                        </div>
+                      </p>
+                      
+                      <div class="row">
+                        <div class="col-md-6 mb-4">
+                          <div class="form-outline">
+                              <label class="formkit-label" for="input_0"><b>Diabetico</b></label>
+                                <select required class="formkit-input" id="input_0" name="clidia">
                                   <option class="formkit-option" value=""></option>
                                   <option class="formkit-option" value="Y">SI</option>
-                                  <option class="formkit-option" value="N">NO</option>
-                                  
+                                  <option class="formkit-option" value="N">NO</option>     
                                 </select>
-                            </p>
+                              </div>
+                            </div>
 
-                            <p> <div class="formkit-outer" data-type="select">
-                                <div class="formkit-wrapper">
-                                  <label class="formkit-label" for="input_0">Presion</label>
-                                  <div class="formkit-inner">
+                            <div class="col-md-6 mb-4">
+                              <div class="form-outline">
+                                  <label required class="formkit-label" for="input_0"><b>Presion</b></label>
                                     <select class="formkit-input" id="input_0" name="clipre">
                                       <option class="formkit-option" value=""></option>
                                       <option class="formkit-option" value="Y">SI</option>
-                                      <option class="formkit-option" value="N">NO</option>
-                                      
+                                      <option class="formkit-option" value="N">NO</option>    
                                     </select>
-                                </p>
+                                  </div>
+                                </div>
+                              </div>
 
-                                <p> <div class="formkit-outer" data-type="select">
-                                    <div class="formkit-wrapper">
-                                      <label class="formkit-label" for="input_0">Hipertenso</label>
-                                      <div class="formkit-inner">
-                                        <select class="formkit-input" id="input_0" name="clihipe">
+                              <div class="row">
+                              <div class="col-md-6 mb-3">
+                                <div class="form-outline">
+                                      <label class="formkit-label" for="input_0"><b>Hipertenso</b></label>
+                                        <select required class="formkit-input" id="input_0" name="clihipe">
                                           <option class="formkit-option" value=""></option>
                                           <option class="formkit-option" value="Y">SI</option>
                                           <option class="formkit-option" value="N">NO</option>
-                                          
                                         </select>
-                                    </p>
-                        <div class="form-group">
-                            <input type="text" name="clitipsa" placeholder="Tipo De Sangre"  class="form-control">
-                    
-                        </div>
+                                      </div>
+                                    </div>
 
-                        <p> <div class="formkit-outer" data-type="select">
-                          <div class="formkit-wrapper">
-                            <label class="formkit-label" for="input_0">Medico</label>
+
+                                    <div class="col-md-6 mb-3">
+                                      <div class="form-outline">
+                                        <label class="formkit-label" for="input_0"><b>Cirugias</b></label>
+                                          <select required class="formkit-input" id="input_0" name="cliquiru">
+                                            <option class="formkit-option" value=""></option>
+                                            <option class="formkit-option" value="Y">SI</option>
+                                            <option class="formkit-option" value="N">NO</option>         
+                                          </select>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                             
+                            <div class="row  d-flex justify-content-center align-items-center h-100">
+                            <div class="form-outline col-md-7 mb-4">
+                            <input type="text" name="clitipsa" placeholder="Tipo De Sangre"  required class="form-control text-center">
+                          </div>
+                        </div>
+             
+                        
+                        <div class="row">
+                        <div class="col-md-6 mb-4">
+                          <div class="form-outline">
+                            <label class="formkit-label" for="input_0"><b>Medico</b></label>
                             <div class="formkit-inner">
-                              <select class="formkit-input" id="input_0" name="climed">
+                              <select required class="formkit-input" id="input_0" name="climed">
                                 <option class="formkit-option" value=""></option>
                                 <option class="formkit-option" value="odelcid">Dr. Oscar Del Cid</option>
                                 <option class="formkit-option" value="ggarcia">Dr. Gabriel García</option>
-                                <option class="formkit-option" value="jgonzales">Dr. Jose Gonzalez</option>
-                                
+                                <option class="formkit-option" value="jgonzalez">Dr. Jose Gonzalez</option>
                               </select>
-                          </p>
-
-        
-
-                        <p> <div class="formkit-outer" data-type="select">
-                            <div class="formkit-wrapper">
-                              <label class="formkit-label" for="input_0">Cirugias</label>
-                              <div class="formkit-inner">
-                                <select class="formkit-input" id="input_0" name="cliquiru">
-                                  <option class="formkit-option" value=""></option>
-                                  <option class="formkit-option" value="Y">SI</option>
-                                  <option class="formkit-option" value="N">NO</option>
-                                  
-                                </select>
-                            </p>
-
-                            <p> <div class="formkit-outer" data-type="select">
-                                <div class="formkit-wrapper">
-                                  <label class="formkit-label" for="input_0">Traumas</label>
+                            </div>
+                          </div>
+                        </div>
+                
+                        <div class="col-md-6 mb-4">
+                          <div class="form-outline">
+                                  <label class="formkit-label" for="input_0"><b>Traumas</b></label>
                                   <div class="formkit-inner">
-                                    <select class="formkit-input" id="input_0" name="clitrauma">
+                                    <select required class="formkit-input" id="input_0" name="clitrauma">
                                       <option class="formkit-option" value=""></option>
                                       <option class="formkit-option" value="Y">SI</option>
                                       <option class="formkit-option" value="N">NO</option>
-                                      
                                     </select>
-                                </p>
+                                  </div>
+                                </div>
+                              </div>
+                        </div>
 
 
-                                <p> <div class="formkit-outer" data-type="select">
-                                    <div class="formkit-wrapper">
-                                      <label class="formkit-label" for="input_0">Alergias</label>
+                        <div class="row">
+                          <div class="col-md-6 mb-4">
+                            <div class="form-outline">
+                                      <label class="formkit-label" for="input_0"><b>Alergias</b></label>
                                       <div class="formkit-inner">
-                                        <select class="formkit-input" id="input_0" name="clialerg">
+                                        <select required class="formkit-input" id="input_0" name="clialerg">
                                           <option class="formkit-option" value=""></option>
                                           <option class="formkit-option" value="Y">SI</option>
                                           <option class="formkit-option" value="N">NO</option>
-                                          
                                         </select>
-                                    </p>
+                                      </div>
+                            </div>
+                          </div>
 
-                                    <p> <div class="formkit-outer" data-type="select">
-                                        <div class="formkit-wrapper">
-                                          <label class="formkit-label" for="input_0">Habitos Toxicos</label>
+                                          <div class="col-md-6 mb-4">
+                                          <div class="form-outline">
+                                          <label class="formkit-label" for="input_0"><b>Habitos Toxicos</b></label>
                                           <div class="formkit-inner">
-                                            <select class="formkit-input" id="input_0" name="clihabit">
+                                            <select required class="formkit-input" id="input_0" name="clihabit">
                                               <option class="formkit-option" value=""></option>
                                               <option class="formkit-option" value="Y">SI</option>
                                               <option class="formkit-option" value="N">NO</option>
-                                              
                                             </select>
-                                        </p>
+                                          </div>
+                                        </div>
+                                      </div>
+                        </div>
 
 
-                                    <div class="form-group">
-                                        <textarea type="text" name="clihistobst" class="form-control" rows="10" cols="40" placeholder="Historial Obstetrico" ></textarea>
-                                        
-                                    </div>
+                        <div class="row">
+                          <div class="col-md-6 mb-4">
+                            <div class="form-outline">
+                            <textarea type="text" name="clihistobst" required class="form-control text-center" rows="10" cols="40" placeholder="Historial Obstetrico" ></textarea>
+                            </div>
+                            </div>
 
                                   
 
 
-                                    <div class="form-group">
-                                        <textarea type="text" name="cliotr" class="form-control" rows="10" cols="40" placeholder="Comentarios"></textarea>
+                            <div class="col-md-6 mb-4">
+                              <div class="form-outline">
+                                        <textarea type="text" name="cliotr" required class="form-control text-center" rows="10" cols="40" placeholder="Comentarios"></textarea>
                                         
                                     </div>
+                            </div>
+                        </div>
                         
 
                         <p>
@@ -183,7 +214,5 @@
                 </div>
             </div>
         </div>
-            
-
   </body>
 </html>

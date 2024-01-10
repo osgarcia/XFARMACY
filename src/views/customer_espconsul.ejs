@@ -6,7 +6,7 @@
     <link href="/assets/img/favico.ico" rel="icon">
 
     <title>Med | Consultas</title>
-    <link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.min.css">
+    <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   </head>
@@ -14,48 +14,60 @@
   <body class="bg-dark-200">
     <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="/prods"><h1><font color="white">MED</font></h1></a>
+          <a class="navbar-brand" href="/prods/<%= User %>#about"><h1><font color="white">MED</font></h1></a>
         </div>
     </nav>
 
     <div class="container mt-5">
         
     <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-md-5">
+        <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
                 <form action="/conesp/<%=data.IDPa%>" method="post">
         
-                   
+                  <div class="form-group text-center">
+                        
+                    <input type="text" name="IDPa" value="<%= data.IDPa%>" style="display:none" class="form-control">
+            
+                </div>
 
 
-            <div class="form-group text-center">
+                <div class="row text-center">
+                  <div class="col-md-6 mb-4">
+                   <div class="form-outline">
                 <label class="formkit-label" for="input_0"><b>Paciente</b></label>
-                <input type="text" name="Nocli" value="<%= data.Noclie%>" class="form-control">
+                <input type="text" name="Nocli" value="<%= data.Noclie%>" class="form-control text-center">
         
             </div>
+          </div>
            
-            <div class="form-group text-center">
+          <div class="col-md-6 mb-4">
+            <div class="form-outline">
                 <label class="formkit-label" for="input_0"><b>Fecha Consulta</b></label>
-                <input type="date" name="Fecconsul"  class="form-control">
+                <input type="date" name="Fecconsul"  class="form-control text-center">
         
             </div>
+          </div>
+        </div>
 
-            <p> <div class="formkit-outer text-center" data-type="select">
-                <div class="formkit-wrapper">
-                  <label class="formkit-label" for="input_0">Referidos A Especialista</label>
+        <div class="row text-center">
+        <div class="col-md-6 mb-3">
+          <div class="form-outline">
+                  <label class="formkit-label" for="input_0"><b>Referidos A Especialista</b></label>
                   <div class="formkit-inner">
                     <select class="formkit-input" id="input_0" name="Refespc">
                       <option class="formkit-option" value=""></option>
                       <option class="formkit-option" value="Y">SI</option>
                       <option class="formkit-option" value="N">NO</option>
-                      
                     </select>
-                </p>
+                  </div>
+                </div>
+              </div>
 
-                <p> <div class="formkit-outer" data-type="select">
-                    <div class="formkit-wrapper">
-                      <label class="formkit-label" for="input_0">Especialidad</label>
+                <div class="col-md-6 mb-3">
+                  <div class="form-outline">
+                      <label class="formkit-label" for="input_0"><b>Especialidad</b></label>
                       <div class="formkit-inner">
                         <select class="formkit-input" id="input_0" name="Tipespec">
                           <option class="formkit-option text-center" value=""></option>
@@ -67,23 +79,29 @@
                           <option class="formkit-option text-center" value="PSI">Psicologia</option>
                           <option class="formkit-option text-center" value="NUT">Nutricion</option>
                         </select>
-                    </p>
+                      </div>
+                    </div>
+                  </div>
+        </div>
 
                     <div class="form-group text-center">
                       <input type="text" name="stcconsul"  value="E" class="form-control text-center" style="display:none">
               
                   </div>
 
-            <div class="form-group text-center">
+                  <div class="row text-center">
+                    <div class="col-md-6 mb-3">
+                      <div class="form-outline">
                 <label class="formkit-label" for="input_0"><b>Motivo De Consulta</b></label>
                 <textarea type="text" name="Moticonsul" rows="10" cols="40"  class="form-control"></textarea>
-        
+              </div>
             </div>
 
-            <div class="form-group text-center">
+            <div class="col-md-6 mb-3">
+              <div class="form-outline">
                 <label class="formkit-label" for="input_0"><b>Historial De Enfermedad</b></label>
                 <textarea type="text" name="Histenf" rows="10" cols="40"  class="form-control"></textarea>
-        
+              </div>
             </div>
 
                 <p> 
@@ -96,6 +114,14 @@
             </button>
                     </div>
         </form>
+
+        <script type="text/javascript">
+          window.onload=function(){//from ww  w . j  a  va2s. c  o  m
+      var today = new Date().toISOString().split('T')[0];
+      document.getElementsByName("Fecconsul")[0].setAttribute('min', today);
+          }
+      
+            </script> 
     </div>
 </div>
 </div>

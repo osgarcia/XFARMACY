@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <link href="/assets/img/favico.ico" rel="icon">
+    
+    <title>MED</title>
+    <link rel="stylesheet" href="https://bootswatch.com/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  </head>
+
+  <body class="bg-dark-200">
+    <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/mendresp/<%= User %>"><h1><font color="white">MED</font></h1></a>
+
+        </div>
+    </nav>
+
+    <div class="container mt-5" >
+        <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body text-center">
+                    <b><label class="formkit-label" for="input_0"><h5>Horario De Atencion</h5></label></b>
+                    <form action="/hrdocesp/<%= User %>" method="post">
+            
+                        
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                              <div class="form-outline">
+                            <input type="text" name="IDD" placeholder="Codigo" value="<%= data.ID %>" class="form-control text-center">
+                        </div>
+                        </div>
+                        
+                        <div class="col-md-6 mb-4">
+                            <div class="form-outline">
+                            <input type="text" name="Ndoc" placeholder="Nombre Completo"  value="<%= Nuser %>" class="form-control text-center">
+                        </div>
+                    </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="formkit-label" for="input_0"><b>Fecha De Atencion</b></label>
+                            <input type="date" name="fecaten"  class="form-control text-center">
+                    
+                        </div>
+                        
+                        <p>
+                        <label class="formkit-label" for="input_0"><b>Horario Matutino</b></label>
+                        </p>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                            <div class="form-outline">
+                            <input type="time" name="Hdoc1" value="07:00" class="form-control text-center">
+                            </div>
+                            </div>
+
+                            <div class="col-md-6 mb-4">
+                                <div class="form-outline">
+                            <input type="time" name="Hdoc2" value="08:00" class="form-control text-center">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                            <div class="form-outline">
+                            <input type="time" name="Hdoc3" value="09:00" class="form-control text-center">
+                            </div>
+                            </div>
+                            
+                            <div class="col-md-6 mb-4">
+                                <div class="form-outline">
+                            <input type="time" name="Hdoc4" value="10:00" class="form-control text-center">
+                                </div>
+                            </div>
+                        </div>
+
+                            <div class="form-group">
+                            <input type="time" name="Hdoc5" value="11:00" class="form-control text-center">
+                            </div>
+
+                            <p>
+                            <label class="formkit-label" for="input_0"><b>Horario Vespertino</b></label>
+                            </p>
+
+                            <div class="row">
+                            <div class="col-md-6 mb-4">
+                            <div class="form-outline">
+                            <input type="time" name="Hdoc6" value="12:00" class="form-control text-center">
+                            </div>
+                            </div>
+
+                            <div class="col-md-6 mb-4">
+                                <div class="form-outline">
+                            <input type="time" name="Hdoc7" value="13:00" class="form-control text-center">
+                                </div>
+                            </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                <div class="form-outline">
+                            <input type="time" name="Hdoc8" value="14:00" class="form-control text-center">
+                                </div>
+                                </div>
+                                
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-outline">
+                            <input type="time" name="Hdoc9" value="15:00" class="form-control text-center">
+                                    </div>
+                                </div>
+                            </div>
+                    
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                <div class="form-outline">
+                            <input type="time" name="Hdoc10" value="16:00" class="form-control text-center">
+                                </div>
+                                </div>
+                    
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-outline">
+                            <input type="time" name="Hdoc11" value="17:00" class="form-control text-center">
+
+                    
+                        </div>
+                    </div>
+                </div>
+                        <p>
+                        <button  class="btn btn-primary">Registrar Horario</button>
+                    </p>
+                    </form>
+
+                    <script type="text/javascript">
+                        window.onload=function(){//from ww  w . j  a  va2s. c  o  m
+                    var today = new Date().toISOString().split('T')[0];
+                    document.getElementsByName("fecaten")[0].setAttribute('min', today);
+                        }
+                    
+                          </script> 
+                </div>
+            </div>
+        </div>
+  </body>
+</html>

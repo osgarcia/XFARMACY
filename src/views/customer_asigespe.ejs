@@ -6,7 +6,7 @@
     <link href="/assets/img/favico.ico" rel="icon">
 
     <title>Med | Consultas</title>
-    <link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.min.css">
+    <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   </head>
@@ -43,7 +43,13 @@
            
             <div class="form-group text-center">
                 <label class="formkit-label" for="input_0"><b>Medico Especialista</b></label>
-                <input type="text" name="medesp"  class="form-control text-center">
+                <input type="text" name="medesp" required   class="form-control text-center">
+        
+            </div>
+
+            <div class="form-group text-center">
+                <label class="formkit-label" for="input_0"><b>Fecha Consulta</b></label>
+                <input type="date" name="Fecconsul" required   class="form-control text-center">
         
             </div>
 
@@ -54,7 +60,7 @@
 
             <div class="form-group text-center">
                 <label class="formkit-label" for="input_0"><b>Horario</b></label>
-                <input type="time" name="clihour"  class="form-control text-center">
+                <input  type="time" name="clihour"  required  class="form-control text-center">
         
             </div>
 
@@ -67,6 +73,14 @@
             </button>
                     </div>
         </form>
+
+        <script type="text/javascript">
+            window.onload=function(){//from ww  w . j  a  va2s. c  o  m
+        var today = new Date().toISOString().split('T')[0];
+        document.getElementsByName("Fecconsul")[0].setAttribute('min', today);
+            }
+        
+              </script> 
     </div>
 </div>
 </div>

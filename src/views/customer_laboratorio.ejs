@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <link href="/assets/img/favico.ico" rel="icon">
+    
+    <title>MED | Principal</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  </head>
+  <body class="bg-dark-200">
+    <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#"><h1><font color="white">MED</font></h1></a>
+          <div class="collapse navbar-collapse" id="navbarColor03">
+            <ul class="navbar-nav me-auto">
+            </ul>
+          </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-5">
+                       <table  class="table table-bordered table-hover text-center">
+                                 <thead>
+                                     <th>
+                                         <h5>MED</h5>
+                                     </th>
+
+                                     <th>
+                                       <h5>Salir</h5>
+                                   </th>
+
+                                 </thead>
+                             <tbody>
+                     <td>
+                     <a href="/reflab" class="btn btn-outline-success"><i class="fa-solid fa-tablets fa-2xl"></i></a>
+                 </td>
+
+                 <td>
+                   <a href="/" class="btn btn-outline-danger"><i class="fa-solid fa-arrow-rotate-left fa-2xl"></i></a>
+               </td>
+
+                 </tbody>
+             </table>
+          
+                     </form>
+                 </div>
+             </div>
+         </div>
+      <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-14">
+                <div class="card">
+                    <div class="card-body">
+                        <form action="/laboratorio" method="get">
+                            <b><label class="formkit-label" for="input_0"><h5>Laboratorio</h5></label></b>
+                            
+                             <p>
+                                
+                                <table id = "pacientes" class="table table-bordered table-hover text-center">
+                                    <thead>
+                                        <tr class="table-dark">
+                                            <th>
+                                                Laboratorio
+                                            </th>
+                                            <th>
+                                                Precio
+                                            </th>
+                                            <th>
+                                                Detalle
+                                            </th>
+                                            <th>
+                                                Estatus
+                                            </th>                                     
+                                    </thead>
+                        </p>
+
+                        <tbody> 
+                            <% if (data) { %>
+                                <% for (var i = 0; i < data.length; i++) { %>
+                                <tr>
+                            
+                                    <td><%= data[i].Nolab %></td>
+                                    <td>Q. <%= data[i].Prelab %></td>
+                                    <td><%= data[i].Labdeta %></td>
+                                    <td><%= data[i].Stlab %></td>
+                                </tr>
+                                <% } %>
+                                <% } %>
+                                    </tbody>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
+
+
+<script>
+var table = new DataTable('#pacientes', {
+    pageLength: 5,
+    lengthMenu: [[5, 10, 20], [5, 10, 20]],
+    language: {
+        url: '//cdn.datatables.net/plug-ins/1.13.5/i18n/es-ES.json',
+    },
+})
+</script>
+
+<script async
+  src="https://js.stripe.com/v3/buy-button.js">
+</script>
+
+  </body>
+</html>

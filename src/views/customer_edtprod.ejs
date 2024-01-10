@@ -6,7 +6,7 @@
     <link href="/assets/img/favico.ico" rel="icon">
     
     <title>Med | Consultas</title>
-    <link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.min.css">
+    <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   </head>
@@ -14,14 +14,14 @@
   <body class="bg-dark-200">
     <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="/prods"><h1><font color="white">MED</font></h1></a>
+          <a class="navbar-brand" href="/prods/<%= User %>#about"><h1><font color="white">MED</font></h1></a>
         </div>
     </nav>
 
     <div class="container mt-5">
         
     <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-md-5">
+        <div class="col-md-7">
             <div class="card">
                 <div class="card-body">
                 <form action="/crsoli/<%=data.IDPa%>" method="post">
@@ -33,35 +33,50 @@
                 
                     </div>
 
-            <div class="form-group text-center">
+                          <div class="row text-center">
+                         <div class="col-md-6 mb-4">
+                          <div class="form-outline">
                 <label class="formkit-label" for="input_0"><b>Paciente</b></label>
-                <input type="text" name="Nocli" value="<%= data.Noclie%>" class="form-control">
-        
-            </div>
+                <input type="text" name="Nocli" value="<%= data.Noclie%>" class="form-control text-center">
+                          </div>
+                         </div>
            
-            <div class="form-group text-center">
-                <label class="formkit-label" for="input_0"><b>Fecha Consulta</b></label>
-                <input type="date" name="Fecconsul"  class="form-control">
+                              <div class="col-md-6 mb-4">
+                            <div class="form-outline">
+                <label class="formkit-label text-center" for="input_0"><b>Fecha Consulta</b></label>
+                <input type="date" name="Fecconsul"  class="form-control text-center">
         
             </div>
+        </div>
+    </div>
 
-            <div class="form-group text-center">
+    <div class="row  d-flex justify-content-center align-items-center h-100 text-center">
+        <div class="form-outline col-md-7 mb-4">
+                 <div class="form-outline">
                 <label class="formkit-label" for="input_0"><b>Horario</b></label>
-                <input type="time" name="clihour"  class="form-control">
+                <input type="time" name="clihour"  class="form-control text-center">
         
             </div>
-
-            <div class="form-group text-center">
+                </div>
+    </div>
+                 <div class="row text-center">
+                <div class="col-md-6 mb-4">
+                    <div class="form-outline">
                 <label class="formkit-label" for="input_0"><b>Motivo De Consulta</b></label>
                 <textarea type="text" name="Moticonsul" rows="10" cols="40"  class="form-control"></textarea>
         
             </div>
+        </div>
 
-            <div class="form-group text-center">
+
+        <div class="col-md-6 mb-4">
+            <div class="form-outline">
                 <label class="formkit-label" for="input_0"><b>Historial De Enfermedad</b></label>
                 <textarea type="text" name="Histenf" rows="10" cols="40"  class="form-control"></textarea>
         
             </div>
+        </div>
+    </div>
 
                 <p> 
                     </p>
@@ -73,6 +88,15 @@
             </button>
                     </div>
         </form>
+
+        <script type="text/javascript">
+            window.onload=function(){//from ww  w . j  a  va2s. c  o  m
+        var today = new Date().toISOString().split('T')[0];
+        document.getElementsByName("Fecconsul")[0].setAttribute('min', today);
+            }
+        
+              </script> 
+
     </div>
 </div>
 </div>
